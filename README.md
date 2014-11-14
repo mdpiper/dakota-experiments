@@ -1,4 +1,5 @@
-dakota-experiments
-==================
+# dakota-experiments
 
-Experiments on CSDMS models with the DAKOTA iterative systems analysis toolkit
+Experiments on [CSDMS](http://csdms.colorado.edu) models
+with the [DAKOTA](http://dakota.sandia.gov)
+iterative systems analysis toolkit.
