@@ -1,0 +1,5 @@
+#! /bin/bash
+# Cleans Dakota files.
+
+rm dakota.rst
+rm -rf step.?

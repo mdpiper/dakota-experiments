@@ -1,0 +1,47 @@
+# Dakota input file - dakota-hydrotrend-1.in
+#
+# In this experiment, a centered parameter study of two HydroTrend
+# variables, river basin length (#28, here "L_r", in km) and drainage
+# area of reservoirs (#29, here "W", in km^2), is performed. The
+# initial values of the variables are used as the center. The center,
+# as well as two steps from the center in each direction in parameter
+# space, are evaluated.
+#
+# Call with:
+#   $ dakota -i dakota-hydrotrend-1.in -o dakota-hydrotrend-1.out &> run.log
+#
+# Mark Piper (mark.piper@colorado.edu)
+
+environment
+  tabular_graphics_data
+    tabular_graphics_file = 'dakota-hydrotrend-1.dat'
+
+method
+  centered_parameter_study
+    steps_per_variable     2      2
+    step_vector         20.0  200.0
+
+model
+  single
+
+# L_r = length of river basin, W = drainage area of reservoirs.
+variables
+  continuous_design = 2
+    descriptors       'L_r'   'W'
+    initial_point     100.0  1000.0
+
+interface
+  fork
+  # asynchronous
+  analysis_driver = 'run_hydrotrend'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  work_directory directory_tag
+  named 'step' file_save directory_save 
+  aprepro
+
+responses
+  response_functions = 1
+  response_descriptors = "Qpeak"
+  no_gradients
+  no_hessians

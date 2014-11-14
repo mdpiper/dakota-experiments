@@ -1,0 +1,23 @@
+#! /bin/bash
+# Connects Dakota to HydroTrend through the filesystem.
+#
+# Arguments:
+#   $1 is 'params.in' from Dakota
+#   $2 is 'results.out' returned to Dakota
+#
+# Mark Piper (mark.piper@colorado.edu)
+
+# Use the parsing utility `dprepro` (from $DAKOTA_DIR/bin) to
+# incorporate the parameters from Dakota into the HydroTrend input
+# template, creating a new HydroTrend input file.
+cp ../HYDRO.IN.template .
+dprepro $1 HYDRO.IN.template HYDRO.IN
+cp HYDRO.IN ../HYDRO_IN
+
+# Call HydroTrend, using the updated contents of the input file.
+hydrotrend --in-dir=../HYDRO_IN --out-dir=../HYDRO_OUTPUT
+
+# Extract the Qpeak value from HYDRO.LOG to return to Dakota.
+cp ../HYDRO_OUTPUT/HYDRO.LOG .
+grep -A 1 Qpeak HYDRO.LOG | tail -1 | cut -f 7 > results.tmp # OMG I am good
+mv results.tmp $2
