@@ -11,7 +11,7 @@ environment
 
 method
   multidim_parameter_study
-    partitions = 10 10
+    partitions = 5 5
 
 model
   single
@@ -21,13 +21,13 @@ model
 variables
   continuous_design = 2
     descriptors    'T'    'P'
-    lower_bounds  -20.0  -5.0
-    upper_bounds   30.0   5.0
+    lower_bounds   10.0   1.5
+    upper_bounds   20.0   2.5
 
 interface
   fork
   # asynchronous
-  analysis_driver = 'run_hydrotrend'
+  analysis_driver = 'run_hydrotrend.py'
   parameters_file = 'params.in'
   results_file    = 'results.out'
   work_directory directory_tag
@@ -36,6 +36,6 @@ interface
 
 responses
   response_functions = 2
-  response_descriptors = "Qs_mean" "Qs_stdev"
+  response_descriptors = 'Qs_mean' 'Qs_stdev'
   no_gradients
   no_hessians
