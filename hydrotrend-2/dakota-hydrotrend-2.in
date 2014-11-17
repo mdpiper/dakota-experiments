@@ -1,9 +1,16 @@
 # Dakota input file - dakota-hydrotrend-2.in
 #
-# In this experiment, a parameter study of two HydroTrend variables, ...
-# 
-# Parameter space is partitioned into 10 equal
+# In this experiment, a parameter study of two HydroTrend variables,
+# starting mean annual temperature (#8, here "T", in Celsius) and
+# starting mean annual precipitation (#9, here "P", in m), is
+# performed. Using specified lower and upper bounds on each
+# parameter, the 2D parameter space is partitioned into 5 equal
 # intervals in each dimension.
+#
+# Call with:
+#   $ dakota -i dakota-hydrotrend-2.in -o dakota-hydrotrend-2.out &> run.log
+#
+# Mark Piper (mark.piper@colorado.edu)
 
 environment
   tabular_graphics_data
