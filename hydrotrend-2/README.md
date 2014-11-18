@@ -32,7 +32,7 @@ are calculated.
 Run this experiment with:
 
 ```bash
-dakota -i dakota-hydrotrend-2.in -o dakota-hydrotrend-2.out &> run.log
+$ dakota -i dakota-hydrotrend-2.in -o dakota-hydrotrend-2.out &> run.log
 ```
 
 Instructions are given to Dakota through the input file
@@ -58,5 +58,8 @@ Clean up intermediate results with the shell script
   of the `Qs` series.
 * The bounds on `T` and `P` were chosen to be
   close to the default values used in WMT.
+* HydroTrend automatically updates the monthly mean climate variables
+  (#12-23), based on the values of `T` and `P`. However, the standard
+  deviations are not altered.
 * The minimum value of `P` must be greater than the value of _constant
   annual base flow_, parameter #11.
