@@ -5,6 +5,8 @@
 # Mark Piper (mark.piper@colorado.edu)
 
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
 
 
 def get_names(dat_file):
@@ -19,7 +21,7 @@ def get_names(dat_file):
 def get_data(dat_file):
     '''
     Reads the data from Dakota tabular graphics file. Returns a numpy array.
-    '''    
+    '''
     return np.loadtxt(dat_file, skiprows=1, unpack=True)
 
 
@@ -31,3 +33,26 @@ def read_tabular(dat_file):
     names = get_names(dat_file)
     data = get_data(dat_file)
     return {'names':names, 'data':data}
+
+def plot_tabular_2d(tab_data, column_index=-1):
+    '''
+    Surface plot.
+    '''
+    x = tab_data.get('data')[1,]
+    y = tab_data.get('data')[2,]
+    z = tab_data.get('data')[column_index,]
+
+    m = len(set(x))
+    n = len(set(y))
+
+    X = x.reshape(m,n)
+    Y = y.reshape(m,n)
+    Z = z.reshape(m,n)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1)
+    ax.set_xlabel(tab_data.get('names')[1])
+    ax.set_ylabel(tab_data.get('names')[2])
+    ax.set_zlabel(tab_data.get('names')[column_index])
+    plt.show(block=False)
