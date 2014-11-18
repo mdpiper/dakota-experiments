@@ -4,30 +4,51 @@
 
 import sys
 import os
+import re
 import shutil
 from subprocess import call
 import numpy as np
 
 
-def read(file):
+def read(output_file):
     '''
     Reads a column of text containing HydroTrend output. Returns a numpy array.
     '''
-    with open(file, 'r') as f:
-        values = f.read().split('\n')
+    with open(output_file, 'r') as fp:
+        values = fp.read().split('\n')
 
     return np.array(values[2:-1], dtype=np.float) # Remove header lines and EOF.
 
 
-def write(file, array):
+def write(results_file, array, labels=['Qs_mean', 'Qs_stdev']):
     '''
     Writes a Dakota results file from an input array.
     '''
-    labels = ['Qs_mean', 'Qs_stdev']
-    f = open(file, 'w')
-    for i in range(len(array)):
-        f.write(str(array[i]) + '\t' + labels[i] + '\n')
-    f.close()
+    try:
+        fp = open(results_file, 'w')
+        for i in range(len(array)):
+            fp.write(str(array[i]) + '\t' + labels[i] + '\n')
+    except IOError:
+        raise
+    finally:
+        fp.close()
+
+
+def get_labels(params_file):
+    '''
+    Uses a regular expression to extract labels from a Dakota parameters file.
+    '''
+    labels = []
+    try:
+        fp = open(params_file, 'r')
+        for line in fp:
+            if re.search('ASV_', line):
+                labels.append(''.join(re.findall(':(\S+)', line)))
+    except IOError:
+        raise
+    finally:
+        fp.close()
+        return(labels)
 
 
 # Files and directories.
@@ -55,5 +76,5 @@ call(['hydrotrend', '--in-dir', input_dir, '--out-dir', output_dir])
 shutil.copy(os.path.join(output_dir, output_file), os.curdir)
 Qs = read(output_file)
 m_Qs = [np.mean(Qs), np.std(Qs)]
-write(sys.argv[2], m_Qs)
-
+labels = get_labels(sys.argv[1])
+write(sys.argv[2], m_Qs, labels)
