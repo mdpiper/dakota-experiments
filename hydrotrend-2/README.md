@@ -1,4 +1,4 @@
-# Dakota: HydroTrend Experiment 2
+# HydroTrend Experiment 2
 
 In this computer experiment,
 a two-dimensional parameter study of HydroTrend
@@ -20,18 +20,20 @@ over 36500 days of simulation time.
 
 Given lower and upper bounds on the values of `T` and `P`,
 the parameter space is partitioned into
-of five equal intervals in each dimension,
+five equal intervals in each dimension,
 forming a grid.
 A HydroTrend simulation is performed
 for the parameter values at each node of the grid,
 for a total of 36 runs.
-For each simulation,
+For each run,
 the mean and standard deviation of the resulting `Qs` series
 are calculated.
 
 Run this experiment with:
 
-	$ dakota -i dakota-hydrotrend-2.in -o dakota-hydrotrend-2.out &> run.log
+```bash
+dakota -i dakota-hydrotrend-2.in -o dakota-hydrotrend-2.out &> run.log
+```
 
 Instructions are given to Dakota through the input file
 <a href="./dakota-hydrotrend-2.in">dakota-hydrotrend-2.in</a>.
@@ -47,14 +49,14 @@ are stored in
 **dakota-hydrotrend-2.dat**.
 Messages from stdout and stderr are filed in
 **run.log**.
-Clean up intermediate results with the script
+Clean up intermediate results with the shell script
 <a href="./dakota_cleanup">dakota_cleanup</a>.
 
 ## Notes
 
-* Two response functions are used, for the mean and standard deviation
+* Two response functions are used for the mean and standard deviation
   of the `Qs` series.
-* The bounds on `T` and `P` were chosen somewhat arbitrarily, yet
+* The bounds on `T` and `P` were chosen to be
   close to the default values used in WMT.
 * The minimum value of `P` must be greater than the value of _constant
   annual base flow_, parameter #11.
