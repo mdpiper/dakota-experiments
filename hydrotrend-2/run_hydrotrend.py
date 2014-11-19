@@ -72,7 +72,7 @@ shutil.copy(input_file, input_dir)
 call(['hydrotrend', '--in-dir', input_dir, '--out-dir', output_dir])
 
 # Calculate mean and standard deviation of Qs for the simulation
-# time. Write the results to a Dakota results file.
+# time. Write the output to a Dakota results file.
 shutil.copy(os.path.join(output_dir, output_file), os.curdir)
 Qs = read(output_file)
 m_Qs = [np.mean(Qs), np.std(Qs)]

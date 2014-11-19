@@ -63,3 +63,5 @@ Clean up intermediate results with the shell script
   deviations are not altered.
 * The minimum value of `P` must be greater than the value of _constant
   annual base flow_, parameter #11.
+* HydroTrend gives warnings that there is snow remaining on Aug 31 for
+  `T` <= 12.

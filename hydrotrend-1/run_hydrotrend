@@ -19,5 +19,5 @@ hydrotrend --in-dir=../HYDRO_IN --out-dir=../HYDRO_OUTPUT
 
 # Extract the Qsbar value from HYDRO.LOG to return to Dakota.
 cp ../HYDRO_OUTPUT/HYDRO.LOG .
-grep -A 1 Qsbar HYDRO.LOG | tail -1 | cut -f 4 > results.tmp # OMG I am good
+grep -A 1 Qsbar HYDRO.LOG | tail -1 | cut -f 4 > results.tmp
 mv results.tmp $2
