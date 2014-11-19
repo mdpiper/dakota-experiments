@@ -14,8 +14,9 @@ def get_names(dat_file):
     Reads the header from Dakota tabular graphics file. Returns a list
     of variable names.
     '''
-    fp = open(dat_file, 'r')
-    return fp.readline().split()
+    with open(dat_file, 'r') as fp:
+        names = fp.readline().split() 
+    return names
 
 
 def get_data(dat_file):
