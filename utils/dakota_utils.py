@@ -35,7 +35,7 @@ def read_tabular(dat_file):
     return {'names':names, 'data':data}
 
 
-def plot_tabular_2d(tab_data, response_index=-1):
+def plot_tabular_2d(tab_data, response_index=-1, title='Dakota Output'):
     '''
     Displays a surface plot of tabular output from a Dakota parameter
     study with two parameters and one or more response functions.
@@ -57,4 +57,5 @@ def plot_tabular_2d(tab_data, response_index=-1):
     ax.set_xlabel(tab_data.get('names')[1])
     ax.set_ylabel(tab_data.get('names')[2])
     ax.set_zlabel(tab_data.get('names')[response_index])
+    plt.title(title)
     plt.show(block=False)
