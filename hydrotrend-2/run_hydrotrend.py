@@ -14,10 +14,7 @@ def read(output_file):
     '''
     Reads a column of text containing HydroTrend output. Returns a numpy array.
     '''
-    with open(output_file, 'r') as fp:
-        values = fp.read().split('\n')
-
-    return np.array(values[2:-1], dtype=np.float) # Remove header lines and EOF.
+    return np.loadtxt(output_file, skiprows=2)
 
 
 def write(results_file, array, labels=['Qs_mean', 'Qs_stdev']):
