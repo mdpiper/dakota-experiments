@@ -49,9 +49,9 @@ def plot_tabular_2d(tab_data, response_index=-1, title='Dakota Output',
     m = len(set(x))
     n = len(set(y))
 
-    X = x.reshape(m,n)
-    Y = y.reshape(m,n)
-    Z = z.reshape(m,n)
+    X = x.reshape(n,m)
+    Y = y.reshape(n,m)
+    Z = z.reshape(n,m)
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
