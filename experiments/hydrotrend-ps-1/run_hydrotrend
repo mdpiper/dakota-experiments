@@ -15,6 +15,9 @@ dprepro $1 HYDRO.IN.template HYDRO.IN
 cp HYDRO.IN ../HYDRO_IN
 
 # Call HydroTrend, using the updated contents of the input file.
+if [ ! -d ../HYDRO_OUTPUT ]; then
+    mkdir ../HYDRO_OUTPUT
+fi
 hydrotrend --in-dir=../HYDRO_IN --out-dir=../HYDRO_OUTPUT
 
 # Extract the Qsbar value from HYDRO.LOG to return to Dakota.
