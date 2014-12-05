@@ -1,0 +1,48 @@
+# Dakota input file - dakota-hydrotrend-2.in
+#
+# In this experiment, a parameter study of two HydroTrend variables,
+# starting mean annual temperature (#8, here "T", in Celsius) and
+# starting mean annual precipitation (#9, here "P", in m), is
+# performed. Using specified lower and upper bounds on each
+# parameter, the 2D parameter space is partitioned into 5 equal
+# intervals in each dimension.
+#
+# Call with:
+#   $ dakota -i dakota-hydrotrend-2.in -o dakota-hydrotrend-2.out &> run.log
+#
+# Mark Piper (mark.piper@colorado.edu)
+
+environment
+  tabular_graphics_data
+    tabular_graphics_file = 'dakota-hydrotrend-2.dat'
+
+method
+  multidim_parameter_study
+    partitions = 5 5
+
+model
+  single
+
+# T = Mean annual temperature (deg C)
+# P = Mean annual preciptiation (m)
+variables
+  continuous_design = 2
+    descriptors    'T'    'P'
+    lower_bounds   10.0   1.5
+    upper_bounds   20.0   2.5
+
+interface
+  fork
+  # asynchronous
+  analysis_driver = 'run_hydrotrend.py'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  work_directory directory_tag
+  named 'step' file_save  directory_save 
+  aprepro
+
+responses
+  response_functions = 2
+  response_descriptors = 'Qs_mean' 'Qs_stdev'
+  no_gradients
+  no_hessians
