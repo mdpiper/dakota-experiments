@@ -45,6 +45,7 @@ setup(
     entry_points={
         'console_scripts': [
             'run_dakota = experiments.scripts.run:main',
+            'cleanup_dakota = experiments.scripts.cleanup:main',
             ],
         },
     )
