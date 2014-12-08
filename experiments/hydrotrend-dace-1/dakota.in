@@ -1,24 +1,18 @@
-# Dakota input file - dakota-hydrotrend-2.in
-#
-# In this experiment, a parameter study of two HydroTrend variables,
-# starting mean annual temperature (#8, here "T", in Celsius) and
-# starting mean annual precipitation (#9, here "P", in m), is
-# performed. Using specified lower and upper bounds on each
-# parameter, the 2D parameter space is partitioned into 5 equal
-# intervals in each dimension.
+# A Dakota design and analysis of computer experiments (DACE)
+# experiment with HydroTrend.
 #
 # Call with:
-#   $ dakota -i dakota-hydrotrend-2.in -o dakota-hydrotrend-2.out &> run.log
+#   $ dakota -i dakota.in -o dakota.out &> run.log
 #
 # Mark Piper (mark.piper@colorado.edu)
 
 environment
   tabular_graphics_data
-    tabular_graphics_file = 'dakota-hydrotrend-2.dat'
+    tabular_graphics_file = 'dakota.dat'
 
 method
-  multidim_parameter_study
-    partitions = 5 5
+  dace lhs seed = 5
+  samples = 120
 
 model
   single
@@ -28,8 +22,9 @@ model
 variables
   continuous_design = 2
     descriptors    'T'    'P'
-    lower_bounds   10.0   1.5
-    upper_bounds   20.0   2.5
+    lower_bounds  -10.0   0.1
+    upper_bounds   30.0   6.1
+    initial_point  14.3   1.6
 
 interface
   fork
