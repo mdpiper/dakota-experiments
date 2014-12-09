@@ -1,3 +1,4 @@
+
 #! /usr/bin/env python
 # Brokers communication between HydroTrend and Dakota through files.
 # Mark Piper (mark.piper@colorado.edu)
@@ -17,11 +18,9 @@ def read(output_file):
     '''
     try:
         a = np.loadtxt(output_file, skiprows=2)
-    except IOError:
-        raise
-    except StopIteration:
-        raise
-    finally:
+    except (IOError, StopIteration):
+        pass
+    else:
         return(a)
 
 
