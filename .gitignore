@@ -55,3 +55,8 @@ target/
 
 # Emacs files
 *~
+
+# Dakota output
+*.dat
+*.out
+run.log
