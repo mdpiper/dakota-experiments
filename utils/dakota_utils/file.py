@@ -5,6 +5,7 @@
 # Mark Piper (mark.piper@colorado.edu)
 
 import os
+from subprocess import check_call
 
 
 def remove(file):
@@ -16,3 +17,12 @@ def remove(file):
     except OSError:
         pass
 
+
+def touch(file):
+    '''
+    Touches a file.
+    '''
+    try:
+        check_call(['touch', file])
+    except CalledProcessError:
+        raise
