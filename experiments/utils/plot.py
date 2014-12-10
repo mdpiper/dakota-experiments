@@ -67,3 +67,30 @@ def plot_samples(tab_data, title=default_title, show=False,
         plt.savefig(outfile, dpi=96)
         plt.close()
 
+
+def plot_irregular_surface(tab_data, response_index=-1,
+                           title=default_title, show=False,
+                           outfile=default_outfile):
+    '''
+    Displays a surface plot of irregular Dakota tabular output (such as
+    from a DACE experiment) interpolated to a regular grid.
+    '''
+    from grid import grid_lhs
+
+    # TODO
+    gz, gx, gy = grid_lhs(tab_data, 40, 30, None, None,
+                          response_index=-2)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot_surface(gx, gy, gz, rstride=1, cstride=1)
+    ax.set_xlabel(tab_data['names'][1])
+    ax.set_ylabel(tab_data['names'][2])
+    ax.set_zlabel(tab_data['names'][response_index])
+    plt.title(title)
+
+    if show == True:
+        plt.show(block=False)
+    else:
+        plt.savefig(outfile, dpi=96)
+        plt.close()
