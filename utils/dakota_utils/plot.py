@@ -12,9 +12,8 @@ default_title = 'Dakota Output'
 default_outfile = 'dakota_output.png'
 
 
-# Rename to 'plot_surface'?
-def plot_tabular_2d(tab_data, response_index=-1, title=default_title,
-                    show=False, outfile=default_outfile):
+def plot_surface(tab_data, response_index=-1, title=default_title,
+                 show=False, outfile=default_outfile):
     '''
     Displays a surface plot of tabular output from a Dakota parameter
     study with two parameters and one or more response functions.
