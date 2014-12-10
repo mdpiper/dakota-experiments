@@ -44,3 +44,26 @@ def plot_tabular_2d(tab_data, response_index=-1, title=default_title,
     else:
         plt.savefig(outfile, dpi=96)
         plt.close()
+
+
+def plot_samples(tab_data, title=default_title, show=False,
+                     outfile=default_outfile):
+    '''
+    Displays a scatterplot of 2D Latin Hypercube samples.
+    '''
+    x = tab_data['data'][1,]
+    y = tab_data['data'][2,]
+    n = len(x)
+
+    plt.figure()
+    plt.plot(x, y, marker='+', linestyle='')
+    plt.xlabel(tab_data['names'][1])
+    plt.ylabel(tab_data['names'][2])
+    plt.title('LHS: ' + str(n) + ' samples, uniform distribution')
+
+    if show == True:
+        plt.show(block=False)
+    else:
+        plt.savefig(outfile, dpi=96)
+        plt.close()
+
