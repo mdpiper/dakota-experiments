@@ -8,8 +8,13 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
 
-def plot_tabular_2d(tab_data, response_index=-1, title='Dakota Output', 
-                    show=False, outfile='dakota_output.png'):
+default_title = 'Dakota Output'
+default_outfile = 'dakota_output.png'
+
+
+# Rename to 'plot_surface'?
+def plot_tabular_2d(tab_data, response_index=-1, title=default_title,
+                    show=False, outfile=default_outfile):
     '''
     Displays a surface plot of tabular output from a Dakota parameter
     study with two parameters and one or more response functions.
