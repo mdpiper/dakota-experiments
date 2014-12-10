@@ -7,16 +7,7 @@
 import os
 import shutil
 import glob
-
-
-def remove_file(file):
-    '''
-    Deletes a file. Silently passes if the file doesn't exist.
-    '''
-    try:
-        os.remove(file)
-    except OSError:
-        pass
+from .file import remove
 
 
 def cleanup_experiment(experiment):
@@ -25,7 +16,7 @@ def cleanup_experiment(experiment):
     '''
     files = ['dakota.rst', 'run.log']
     for file in files:
-        remove_file(os.path.join(experiment, file))
+        remove(os.path.join(experiment, file))
     for dir in glob.glob(os.path.join(experiment, 'step.*')):
         shutil.rmtree(dir)
 
@@ -47,6 +38,7 @@ def main():
         return
     else:
         cleanup_experiment(args.experiment)
+
 
 if __name__ == '__main__':
     main()
