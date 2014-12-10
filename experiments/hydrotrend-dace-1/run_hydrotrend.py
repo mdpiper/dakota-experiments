@@ -85,7 +85,7 @@ def main():
     if series != None:
         m_series = [np.mean(series), np.std(series)]
     else:
-        m_series = [0, 0]
+        m_series = [float('nan'), float('nan')]
     write(sys.argv[2], m_series, labels)
 
 
