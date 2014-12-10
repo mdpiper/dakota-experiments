@@ -32,14 +32,14 @@ def cleanup_experiment(experiment):
 
 def main():
     import argparse
-    from experiments import __version__
+    from utils import __version__, cleanup_script
 
     parser = argparse.ArgumentParser(
         description="Cleans up the results of a Dakota experiment.")
     parser.add_argument("experiment",
                         help="path to directory with Dakota experiment files")
     parser.add_argument('--version', action='version', 
-                        version='cleanup_dakota ' + __version__)
+                        version=cleanup_script + ' ' + __version__)
     args = parser.parse_args()
 
     if os.path.isdir(args.experiment) is False:

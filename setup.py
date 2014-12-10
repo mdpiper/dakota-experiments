@@ -7,7 +7,7 @@
 from ez_setup import use_setuptools # https://pypi.python.org/pypi/setuptools
 use_setuptools()
 from setuptools import setup, find_packages
-from experiments import __version__
+from utils import __version__, run_script, cleanup_script
 
 # Get the long description from the README file.
 def get_long_description():
@@ -41,11 +41,11 @@ setup(
     ],
     keywords='CSDMS, earth systems modeling, DAKOTA, systems analysis',
     packages=find_packages(exclude=['*.tests']),
-    install_requires=['numpy', 'matplotlib'],
+    install_requires=['numpy', 'matplotlib', 'scipy'],
     entry_points={
         'console_scripts': [
-            'run_dakota = experiments.scripts.run:main',
-            'cleanup_dakota = experiments.scripts.cleanup:main',
+            run_script + ' = utils.dakota_utils.run:main',
+            cleanup_script + ' = utils.dakota_utils.cleanup:main',
             ],
         },
     )

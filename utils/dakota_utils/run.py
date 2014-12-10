@@ -73,14 +73,14 @@ def print_error_status(error):
 
 def main():
     import argparse
-    from experiments import __version__
+    from utils import __version__, run_script
 
     parser = argparse.ArgumentParser(
         description="Runs a Dakota experiment on a CSDMS model.")
     parser.add_argument("experiment",
                         help="path to directory with Dakota experiment files")
     parser.add_argument('--version', action='version', 
-                        version='run_dakota ' + __version__)
+                        version=run_script + ' ' + __version__)
     args = parser.parse_args()
 
     if is_dakota_installed() is False: 

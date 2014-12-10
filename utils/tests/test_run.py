@@ -4,7 +4,7 @@ from nose.tools import *
 import os
 import tempfile
 import shutil
-from experiments.scripts.run import *
+from utils.dakota_utils.run import *
 
 def setup_module():
     os.environ['_test_tmp_dir'] = tempfile.mkdtemp()
@@ -14,6 +14,9 @@ def teardown_module():
 
 @raises(TypeError)
 def test_no_experiment():
+    '''
+    Tests for no input parameter.
+    '''
     run_experiment()
 
 def test_no_experiment_content():
