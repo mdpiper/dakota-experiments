@@ -1,13 +1,13 @@
 #! /usr/bin/env python
 #
-# dakota-experiments
+# The dakota_utils package setup.
 #
 # Mark Piper (mark.piper@colorado.edu)
 
 from ez_setup import use_setuptools # https://pypi.python.org/pypi/setuptools
 use_setuptools()
 from setuptools import setup, find_packages
-from utils import __version__, run_script, cleanup_script
+from dakota_utils import __version__, run_script, cleanup_script
 
 # Get the long description from the README file.
 def get_long_description():
@@ -24,7 +24,7 @@ def get_long_description():
         return long_description
 
 setup(
-    name='dakota-experiments',
+    name='dakota_utils',
     version=__version__,
     description='Systems analysis computer experiments on CSDMS models',
     long_description=get_long_description(),
@@ -44,8 +44,8 @@ setup(
     install_requires=['numpy', 'matplotlib', 'scipy'],
     entry_points={
         'console_scripts': [
-            run_script + ' = utils.dakota_utils.run:main',
-            cleanup_script + ' = utils.dakota_utils.cleanup:main',
+            run_script + ' = dakota_utils.run:main',
+            cleanup_script + ' = dakota_utils.cleanup:main',
             ],
         },
     )
