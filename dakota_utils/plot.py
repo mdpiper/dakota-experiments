@@ -77,8 +77,7 @@ def plot_irregular_surface(tab_data, response_index=-1,
     from .grid import grid_lhs
 
     # TODO
-    gz, gx, gy = grid_lhs(tab_data, 40, 30, None, None,
-                          response_index=-2)
+    gz, gx, gy = grid_lhs(tab_data, 40, 30, None, None, response_index)
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
