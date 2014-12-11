@@ -1,14 +1,13 @@
-
 #! /usr/bin/env python
 # Brokers communication between HydroTrend and Dakota through files.
 # Mark Piper (mark.piper@colorado.edu)
 
 import sys
 import os
-import re
 import shutil
 from subprocess import call
 import numpy as np
+from dakota_utils.read import get_labels
 
 
 def read(output_file):
@@ -36,23 +35,6 @@ def write(results_file, array, labels=['Qs_mean', 'Qs_stdev']):
         raise
     finally:
         fp.close()
-
-
-def get_labels(params_file):
-    '''
-    Uses a regular expression to extract labels from a Dakota parameters file.
-    '''
-    labels = []
-    try:
-        fp = open(params_file, 'r')
-        for line in fp:
-            if re.search('ASV_', line):
-                labels.append(''.join(re.findall(':(\S+)', line)))
-    except IOError:
-        raise
-    finally:
-        fp.close()
-        return(labels)
 
 
 def main():
