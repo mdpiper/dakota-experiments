@@ -11,8 +11,8 @@ from nose.tools import *
 import os
 import tempfile
 import shutil
-from utils.dakota_utils.file import touch, remove
-from utils.dakota_utils.run import *
+from dakota_utils.file import touch, remove
+from dakota_utils.run import *
 
 def setup_module():
     print('Run tests:')

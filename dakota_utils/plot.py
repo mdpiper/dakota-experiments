@@ -74,7 +74,7 @@ def plot_irregular_surface(tab_data, response_index=-1,
     Displays a surface plot of irregular Dakota tabular output (such as
     from a DACE experiment) interpolated to a regular grid.
     '''
-    from grid import grid_lhs
+    from .grid import grid_lhs
 
     # TODO
     gz, gx, gy = grid_lhs(tab_data, 40, 30, None, None,

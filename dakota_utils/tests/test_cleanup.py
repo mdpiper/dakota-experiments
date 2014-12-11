@@ -11,7 +11,7 @@ from nose.tools import *
 import os
 import tempfile
 import shutil
-from utils.dakota_utils.cleanup import *
+from dakota_utils.cleanup import *
 
 def setup_module():
     print('Cleanup tests:')

@@ -23,7 +23,7 @@ def cleanup_experiment(experiment):
 
 def main():
     import argparse
-    from utils import __version__, cleanup_script
+    from dakota_utils import __version__, cleanup_script
 
     parser = argparse.ArgumentParser(
         description="Cleans up the results of a Dakota experiment.")

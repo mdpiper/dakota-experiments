@@ -73,7 +73,7 @@ def print_error_status(error):
 
 def main():
     import argparse
-    from utils import __version__, run_script
+    from dakota_utils import __version__, run_script
 
     parser = argparse.ArgumentParser(
         description="Runs a Dakota experiment on a CSDMS model.")
