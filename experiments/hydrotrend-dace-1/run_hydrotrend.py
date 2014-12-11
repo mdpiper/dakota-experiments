@@ -8,6 +8,7 @@ import shutil
 from subprocess import call
 import numpy as np
 from dakota_utils.read import get_labels
+from dakota_utils.write import write_results
 
 
 def read(output_file):
@@ -21,20 +22,6 @@ def read(output_file):
         pass
     else:
         return(a)
-
-
-def write(results_file, array, labels=['Qs_mean', 'Qs_stdev']):
-    '''
-    Writes a Dakota results file from an input array.
-    '''
-    try:
-        fp = open(results_file, 'w')
-        for i in range(len(array)):
-            fp.write(str(array[i]) + '\t' + labels[i] + '\n')
-    except IOError:
-        raise
-    finally:
-        fp.close()
 
 
 def main():
@@ -68,7 +55,7 @@ def main():
         m_series = [np.mean(series), np.std(series)]
     else:
         m_series = [float('nan'), float('nan')]
-    write(sys.argv[2], m_series, labels)
+    write_results(sys.argv[2], m_series, labels)
 
 
 if __name__ == '__main__':
