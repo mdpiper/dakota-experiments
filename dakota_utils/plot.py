@@ -38,15 +38,14 @@ def plot_surface(tab_data, response_index=-1, title=default_title,
     plt.title(title)
 
     # Either show plot or save it to a PNG file.
-    if show == True:
+    if show:
         plt.show(block=False)
     else:
         plt.savefig(outfile, dpi=96)
         plt.close()
 
 
-def plot_samples(tab_data, title=default_title, show=False,
-                     outfile=default_outfile):
+def plot_samples(tab_data, show=False, outfile=default_outfile):
     '''
     Displays a scatterplot of 2D Latin Hypercube samples.
     '''
@@ -60,7 +59,7 @@ def plot_samples(tab_data, title=default_title, show=False,
     plt.ylabel(tab_data['names'][2])
     plt.title('LHS: ' + str(n) + ' samples, uniform distribution')
 
-    if show == True:
+    if show:
         plt.show(block=False)
     else:
         plt.savefig(outfile, dpi=96)
@@ -87,7 +86,7 @@ def plot_irregular_surface(tab_data, response_index=-1,
     ax.set_zlabel(tab_data['names'][response_index])
     plt.title(title)
 
-    if show == True:
+    if show:
         plt.show(block=False)
     else:
         plt.savefig(outfile, dpi=96)
