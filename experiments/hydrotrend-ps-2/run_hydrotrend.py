@@ -25,7 +25,7 @@ def read(output_file):
         return(a)
 
 
-def write(results_file, array, labels=['Qs_mean', 'Qs_stdev']):
+def write(results_file, array, labels):
     '''
     Writes a Dakota results file from an input array.
     '''
