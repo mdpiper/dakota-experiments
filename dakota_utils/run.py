@@ -5,7 +5,6 @@
 # Mark Piper (mark.piper@colorado.edu)
 
 import os
-import sys
 import subprocess
 from glob import glob
 
