@@ -8,21 +8,21 @@ import os
 from subprocess import check_call
 
 
-def remove(file):
+def remove(fname):
     '''
     Deletes a file. Silently passes if the file doesn't exist.
     '''
     try:
-        os.remove(file)
+        os.remove(fname)
     except OSError:
         pass
 
 
-def touch(file):
+def touch(fname):
     '''
     Touches a file.
     '''
     try:
-        check_call(['touch', file])
+        check_call(['touch', fname])
     except CalledProcessError:
         raise
