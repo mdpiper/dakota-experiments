@@ -4,7 +4,7 @@
 
 # Note that these imports are from the installed version of dakota_utils.
 from dakota_utils.read import read_tabular
-from dakota_utils.plot import plot_samples, plot_irregular_surface
+from dakota_utils.plot import plot_samples, plot_surface
 
 tab_file = 'dakota-hydrotrend-2.dat'
 tab_data = read_tabular(tab_file)
