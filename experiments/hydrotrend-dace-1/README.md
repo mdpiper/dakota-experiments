@@ -44,4 +44,6 @@ $ dakota -i dakota.in -o dakota.out &> run.log
 * The value of `N_s` was chosen to be one tenth the number of points
   used in the 40 x 30 gridded parameter study used in the
   **hydrotrend-ps-2** experiment.
+* Set ranges of `T` and `P` to avoid NaN returns,
+  which give scipy.interpolate.griddata difficulties.
 * A seed value of 5 was chosen. The same seed should give same output.
