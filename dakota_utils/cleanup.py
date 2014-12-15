@@ -14,8 +14,8 @@ def cleanup_experiment(experiment):
     '''
     Cleans up intermediate Dakota files after running an experiment.
     '''
-    files = ['dakota.rst', 'run.log']
-    for fname in files:
+    targets = ['dakota.rst', 'run.log', 'HYDRO_OUTPUT']
+    for fname in targets:
         remove(os.path.join(experiment, fname))
     for dname in glob.glob(os.path.join(experiment, 'step.*')):
         shutil.rmtree(dname)
