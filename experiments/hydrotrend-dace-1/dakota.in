@@ -28,6 +28,7 @@ variables
 
 interface
   fork
+  id_interface = 'base' # new in Dakota 6.1
   # asynchronous
   analysis_driver = 'run_hydrotrend.py'
   parameters_file = 'params.in'
