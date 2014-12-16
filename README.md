@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mdpiper/dakota-experiments.svg?branch=master)](https://travis-ci.org/mdpiper/dakota-experiments)
+
 # dakota-experiments
 
 Experiments on [CSDMS](http://csdms.colorado.edu) models
