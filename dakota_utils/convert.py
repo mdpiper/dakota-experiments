@@ -6,6 +6,19 @@
 
 import shutil
 from subprocess import check_call, CalledProcessError
+from dakota_utils.read import get_names
+
+
+def has_interface_column(tab_file):
+    '''
+    Returns True if the tabular output file has the v6.1 'interface' column.
+    '''
+    try:
+        val = get_names(tab_file)[1] == 'interface'
+    except IOError:
+        raise
+    else:
+        return(val)
 
 
 def strip_interface_column(tab_file):

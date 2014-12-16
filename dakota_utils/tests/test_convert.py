@@ -23,6 +23,20 @@ def teardown_module():
     shutil.rmtree(os.environ['_test_tmp_dir'])
 
 @raises(TypeError)
+def test_has_interface_column_no_input():
+    '''
+    Tests for no input parameter to has_interface_column().
+    '''
+    has_interface_column()
+
+@raises(IOError)
+def test_has_interface_column_file_does_not_exist():
+    '''
+    Tests for nonexistent input to has_interface_column().
+    '''
+    has_interface_column(nonfile)
+
+@raises(TypeError)
 def test_strip_interface_column_no_input():
     '''
     Tests for no input parameter to strip_interface_column().
