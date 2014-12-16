@@ -7,7 +7,8 @@
 from ez_setup import use_setuptools # https://pypi.python.org/pypi/setuptools
 use_setuptools()
 from setuptools import setup, find_packages
-from dakota_utils import __version__, run_script, cleanup_script
+from dakota_utils import __version__, \
+    run_script, cleanup_script, convert_script
 
 # Get the long description from the README file.
 def get_long_description():
@@ -46,6 +47,7 @@ setup(
         'console_scripts': [
             run_script + ' = dakota_utils.run:main',
             cleanup_script + ' = dakota_utils.cleanup:main',
+            convert_script + ' = dakota_utils.convert:main'
             ],
         },
     )
