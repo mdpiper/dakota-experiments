@@ -4,7 +4,7 @@
 #
 # Mark Piper (mark.piper@colorado.edu)
 
-from subprocess import call
+import subprocess
 import numpy as np
 
 
@@ -19,6 +19,18 @@ def load(output_file):
         pass
     else:
         return(series)
+
+
+def is_in_path():
+    '''
+    Returns True if the HydroTrend executable is in the path.
+    '''
+    try:
+        subprocess.call(['hydrotrend', '--version'])
+    except OSError:
+        return False
+    else:
+        return True
 
 
 def call(input_dir, output_dir):
