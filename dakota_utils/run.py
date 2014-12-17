@@ -7,6 +7,7 @@
 import os
 import subprocess
 from glob import glob
+import time
 
 
 def is_dakota_installed():
@@ -42,17 +43,20 @@ def run_experiment(experiment):
         infile = get_input_file(experiment)
         outfile = os.path.splitext(infile)[0] + '.out'
         os.chdir(experiment)
+        start_time = time.time()
         subprocess.check_output(['dakota', 
                                  '-i', infile, 
                                  '-o', outfile, 
                                  '-no_input_echo'], 
                                 stderr=subprocess.STDOUT)
+        elapsed_time = time.time() - start_time
     except AttributeError:
         status = 'Error: DAKOTA input file not found.'
     except subprocess.CalledProcessError as e:
         status = e
     else:
-        status = 'Finished.'
+        status = 'Finished.\n%s %.1f %s' \
+                 % ('Elapsed time:', elapsed_time, 's')
     finally:
         os.chdir(start_dir)
     return status
@@ -98,6 +102,7 @@ def main():
         print_error_status(status)
     else:
         print(status)
+
 
 if __name__ == '__main__':
     main()
