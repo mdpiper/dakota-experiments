@@ -9,19 +9,7 @@ from subprocess import call
 import numpy as np
 from dakota_utils.read import get_labels
 from dakota_utils.write import write_results
-
-
-def read(output_file):
-    '''
-    Reads a column of text containing HydroTrend output. Returns a numpy array,
-    or None on an error.
-    '''
-    try:
-        a = np.loadtxt(output_file, skiprows=2)
-    except (IOError, StopIteration):
-        pass
-    else:
-        return(a)
+from dakota_utils.models.hydrotrend import load_series
 
 
 def main():
@@ -52,7 +40,7 @@ def main():
     # series for the simulation. Write the output to a Dakota results file.
     shutil.copy(os.path.join(output_dir, output_file), os.curdir)
     labels = get_labels(sys.argv[1])
-    series = read(output_file)
+    series = load_series(output_file)
     if series is not None:
         m_series = [np.mean(series), np.std(series)]
     else:
