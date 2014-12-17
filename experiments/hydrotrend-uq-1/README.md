@@ -3,25 +3,34 @@
 This is an uncertainty quantification (UQ) experiment
 with HydroTrend.
 
-In this experiment,
-the same input parameters (`T`, `P`)
-and response functions (`Qs_mean`, `Qs_stdev`)
-from the **hydrotrend-ps-2** experiment
-are used.
-The Latin Hypercube sampling (LHS) technique
-is used to obtain `N_s = 120` input points
-from the `T-P` parameter space.
-When used for DACE,
-LHS divides each dimension of the parameter space
-into `N_s` uniform partitions between the variable bounds.
-Samples are then selected
-such that every row and column in the hypercube of partitions
-contains exactly one sample.
-The resulting LHS sample set
-has better coverage and less clustering
-than Monte Carlo sampling.
+As in other HydroTrend experiments,
+the input parameters `T` and `P`
+are used,
+although, in this case, over a much smaller,
+and more physical,
+range of values.
+Instead of examining
+long-term suspended sediment load at the river mouth, `Qs`,
+used in earlier experiments,
+the effect of varying `T` and `P`
+on water discharge at the river mouth, `Q`,
+is evaluated.
+The experiment response functions are the mean and standard deviation
+of the cumulative discharge over the 100-year simulation,
+`Q_mean` and `Q_stdev`.
 
-For comparison with the output from **hydrotrend-ps-2**,
+Latin Hypercube sampling (LHS)
+is used to obtain `N_s = 20` input points
+from the `T-P` parameter space.
+
+By specifying the `asynchronous` keyword
+in the Dakota input file,
+runs are performed in parallel,
+using two (the number of processors on my Mac)
+concurrent evaluations.
+
+For comparison with the output
+from **hydrotrend-ps-2** and **hydrotrend-dace-1**,
 the results from this experiment
 are interpolated to a rectangular grid.
 
@@ -33,9 +42,8 @@ $ dakota -i dakota.in -o dakota.out &> run.log
 
 ## Notes
 
-* The value of `N_s` was chosen to be one tenth the number of points
-  used in the 40 x 30 gridded parameter study used in the
-  **hydrotrend-ps-2** experiment.
-* Set ranges of `T` and `P` to avoid NaN returns,
-  which give scipy.interpolate.griddata difficulties.
-* A seed value of 5 was chosen. The same seed should give same output.
+* The value of `N_s` was chosen to be a tiny fraction of the number of
+  points used in the 40 x 30 gridded parameter study in
+  **hydrotrend-ps-2**.
+* A seed value of 17 was chosen to obtain repeatable results over
+  multiple runs.
