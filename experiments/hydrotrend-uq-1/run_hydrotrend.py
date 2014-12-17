@@ -4,48 +4,35 @@
 
 import sys
 import os
-import shutil
-from subprocess import call
-import numpy as np
-from dakota_utils.read import get_labels
-from dakota_utils.write import write_results
-from dakota_utils.models.hydrotrend import load_series
+from dakota_utils.models import hydrotrend
 
 
 def main():
+    '''
+    Sets up HydroTrend input, runs model, gathers output. 
+    '''    
+    if hydrotrend.is_installed() is False:
+       print('Error: HydroTrend executable cannot be located.')
+       return
 
-    # Files and directories.
+    # References to files passed by Dakota.
+    params_file = sys.argv[1]
+    results_file = sys.argv[2]
+
+    h = hydrotrend.HydroTrend()
+    h.output_file = 'HYDROASCII.Q'
+
+    # Set up the HydroTrend run, taking information from the parameters
+    # file passed by Dakota (sys.argv[1]).
     start_dir = os.path.dirname(os.path.realpath(__file__))
-    input_template = 'HYDRO.IN.template'
-    input_file = 'HYDRO.IN'
-    hyps_file = 'HYDRO0.HYPS'
-    output_file = 'HYDROASCII.Q'
-    input_dir = os.path.join(os.curdir, 'HYDRO_IN')
-    if not os.path.exists(input_dir): os.mkdir(input_dir)
-    output_dir = os.path.join(os.curdir, 'HYDRO_OUTPUT')
-    if not os.path.exists(output_dir): os.mkdir(output_dir)
+    h.setup(start_dir, params_file)
 
-    # Use the parsing utility `dprepro` (from $DAKOTA_DIR/bin) to
-    # incorporate the parameters from Dakota into the HydroTrend input
-    # template, creating a new HydroTrend input file.
-    shutil.copy(os.path.join(start_dir, input_template), os.curdir)
-    call(['dprepro', sys.argv[1], input_template, input_file])
-    shutil.copy(input_file, input_dir)
-    shutil.copy(os.path.join(start_dir, hyps_file), input_dir)
-
-    # Call HydroTrend, using the updated input file.
-    call(['hydrotrend', '--in-dir', input_dir, '--out-dir', output_dir])
+    # Call HydroTrend, using the input file modified by Dakota.
+    h.call()
 
     # Calculate mean and standard deviation of a HydroTrend output time
     # series for the simulation. Write the output to a Dakota results file.
-    shutil.copy(os.path.join(output_dir, output_file), os.curdir)
-    labels = get_labels(sys.argv[1])
-    series = load_series(output_file)
-    if series is not None:
-        m_series = [np.mean(series), np.std(series)]
-    else:
-        m_series = [float('nan'), float('nan')]
-    write_results(sys.argv[2], m_series, labels)
+    h.teardown(params_file, results_file)
 
 
 if __name__ == '__main__':
