@@ -38,7 +38,7 @@ def run_experiment(experiment):
     '''
     Performs the specified Dakota experiment.
     '''
-    start_dir = os.path.abspath('.')
+    start_dir = os.getcwd()
     try:
         infile = get_input_file(experiment)
         outfile = os.path.splitext(infile)[0] + '.out'
