@@ -37,7 +37,6 @@ class HydroTrend(object):
         self._hypsometry_file = 'HYDRO0.HYPS'
         self._output_file = 'HYDROASCII.QS'
 
-        # TODO: check permissions on directories
         self._input_dir = os.path.join(os.curdir, 'HYDRO_IN') \
                           if indir is None else indir
         if os.path.exists(self._input_dir) is False: 
