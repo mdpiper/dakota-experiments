@@ -24,7 +24,7 @@ def teardown_module():
 
 def test_HydroTrend_no_arguments():
     '''
-    Tests no arguments creates input and output directories.
+    Tests whether no arguments creates input and output directories.
     '''
     os.chdir(os.environ['_test_hydrotrend_dir'])
     h = HydroTrend()
@@ -49,26 +49,14 @@ def test_HydroTrend_set_output_dir():
     h = HydroTrend(None, output_dir)
     assert_equal(h.output_dir, output_dir)
 
+def test_load_no_output_file():
+    '''
+    Tests return from load() when no output file is defined.
+    '''
+    os.chdir(os.environ['_test_hydrotrend_dir'])
+    h = HydroTrend()
+    r = h.load()
+    assert_is_none(r)
 
-# @raises(TypeError)
-# def test_load_no_arguments():
-#     '''
-#     Tests for no arguments to load().
-#     '''
-#     load()
-
-# def test_load_file_does_not_exist():
-#     '''
-#     Tests for nonexistent input to load().
-#     '''
-#     r = load(nonfile)
-#     assert_is_none(r)
-
-# @raises(TypeError)
-# def test_call_no_arguments():
-#     '''
-#     Tests for no arguments to call().
-#     '''
-#     call()
 
 
