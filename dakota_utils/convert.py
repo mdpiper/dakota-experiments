@@ -17,6 +17,8 @@ def has_interface_column(tab_file):
         val = get_names(tab_file)[1] == 'interface'
     except IOError:
         raise
+    except TypeError:
+        return False
     else:
         return(val)
 

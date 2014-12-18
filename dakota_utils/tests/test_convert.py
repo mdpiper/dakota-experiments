@@ -29,12 +29,12 @@ def test_has_interface_column_no_input():
     '''
     has_interface_column()
 
-@raises(IOError)
 def test_has_interface_column_file_does_not_exist():
     '''
     Tests for nonexistent input to has_interface_column().
     '''
-    has_interface_column(nonfile)
+    r = has_interface_column(nonfile)
+    assert_false(r)
 
 @raises(TypeError)
 def test_strip_interface_column_no_input():

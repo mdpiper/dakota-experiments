@@ -28,11 +28,15 @@ def get_labels(params_file):
 def get_names(dat_file):
     '''
     Reads the header from Dakota tabular graphics file. Returns a list
-    of variable names.
+    of variable names or None on an error.
     '''
-    with open(dat_file, 'r') as fp:
-        names = fp.readline().split() 
-    return names
+    try:
+        with open(dat_file, 'r') as fp:
+            names = fp.readline().split()
+    except IOError:
+        pass
+    else:
+        return names
 
 
 def get_data(dat_file):
