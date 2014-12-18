@@ -33,6 +33,7 @@ def test_no_experiment_content():
     Tests run_experiment() with nonexistent input file.
     '''
     err_str = 'Error: DAKOTA input file not found.'
+    os.chdir(os.path.dirname(__file__))
     r = run_experiment(os.environ['_test_tmp_dir'])
     assert_equal(r, err_str)
 
