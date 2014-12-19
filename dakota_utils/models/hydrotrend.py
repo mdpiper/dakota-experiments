@@ -46,7 +46,7 @@ class HydroTrend(object):
         if os.path.exists(self._output_dir) is False: 
             os.mkdir(self._output_dir, 0755)
 
-        self._response_statistic = 'sum'
+        self._response_statistic = 'mean'
 
     @property
     def input_dir(self):
