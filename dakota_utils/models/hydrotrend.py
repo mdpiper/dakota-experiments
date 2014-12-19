@@ -46,6 +46,8 @@ class HydroTrend(object):
         if os.path.exists(self._output_dir) is False: 
             os.mkdir(self._output_dir, 0755)
 
+        self._response_statistic = 'sum'
+
     @property
     def input_dir(self):
         '''
@@ -130,6 +132,21 @@ class HydroTrend(object):
         '''
         self._output_files = value
 
+    @property
+    def response_statistic(self):
+        '''
+        A string setting the statistic used in the Dakota response. A
+        choice of 'mean' (the default), 'stdev', 'sum', 'median', or 'max'.
+        '''
+        return self._response_statistic
+
+    @response_statistic.setter
+    def response_statistic(self, value):
+        '''
+        Sets the type of statistic used in the Dakota response.
+        '''
+        self._response_statistic = value
+
     def setup(self, start_dir, params_file):
         '''
         Set up HydroTrend inputs. Use the Dakota parsing utility `dprepro`
@@ -164,20 +181,35 @@ class HydroTrend(object):
         else:
             return(series)
 
+    def calculate(self):
+        '''
+        Calculates the statistic (sum, mean, ...) used in the Dakota
+        response function.
+        '''
+        response = []
+        for fname in self._output_files:
+            shutil.copy(os.path.join(self._output_dir, fname), os.curdir)
+            series = self.load(fname)
+            if series is not None:
+                if self._response_statistic == 'sum':
+                    response.append(np.sum(series))
+                elif self._response_statistic == 'std':
+                    response.append(np.stdev(series))
+                elif self._response_statistic == 'max':
+                    response.append(np.max(series))
+                elif self._response_statistic == 'median':
+                    response.append(np.max(series))
+                else:
+                    response.append(np.mean(series)) # 'mean' is default
+            else:
+                response.append(float('nan'))
+        return(response)
+
     def teardown(self, params_file, results_file):
         '''
         Reads HydroTrend output and calculates statistics to pass back to
         Dakota.
         '''
-        # TODO: Encapsulate this block in its own fn ("calculate"?)
-        m_series = []
-        for output_file in self._output_files:
-            shutil.copy(os.path.join(self._output_dir, output_file), os.curdir)
-            series = self.load(output_file)
-            if series is not None:
-                m_series.append(np.mean(series))
-            else:
-                m_series.append(float('nan'))
-            
+        response = self.calculate()
         labels = get_labels(params_file)
-        write_results(results_file, m_series, labels)
+        write_results(results_file, response, labels)
