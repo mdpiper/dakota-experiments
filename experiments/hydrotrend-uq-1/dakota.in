@@ -1,4 +1,5 @@
-# A Dakota uncertainty quantification (UQ) experiment with HydroTrend.
+# A Dakota uncertainty quantification (UQ) experiment with
+# HydroTrend. See README.md for a description.
 #
 # Call with:
 #   $ dakota -i dakota.in -o dakota.out &> run.log
@@ -15,14 +16,11 @@ method
     seed = 17
     samples = 24
     response_levels = 
-        65  70  75  80  85  90
-        20  25  30  35  40  45
-         0   1   2   3   4   5
+        30   35  40  45  50
+	3.0 3.5 4.0 4.5 5.0
+	0.7 0.8 0.9 1.0 1.1
     distribution cumulative
 
-# T = Mean annual temperature (deg C)
-# P = Mean annual preciptiation (m)
-# Ranges are approx 10% of default values set in WMT
 variables
   uniform_uncertain = 2
     descriptors     'T'   'P'
@@ -42,6 +40,6 @@ interface
 
 responses
   response_functions = 3
-  response_descriptors = 'Q_m' 'Qs_m' 'Qb_m'
+  response_descriptors = '_Q' '_Qs' '_Qb'
   no_gradients
   no_hessians
