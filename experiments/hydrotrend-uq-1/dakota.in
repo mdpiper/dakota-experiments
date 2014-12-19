@@ -14,17 +14,19 @@ method
     sample_type lhs
     seed = 17
     samples = 24
-    response_levels = 0.1 0.5 0.9
-                      0.1 0.5 0.9
+    response_levels = 
+        50  60  70  80  90 100
+       100 120 140 160 180 200
     distribution cumulative
 
 # T = Mean annual temperature (deg C)
 # P = Mean annual preciptiation (m)
+# Ranges are approx 10% of default values set in WMT
 variables
   uniform_uncertain = 2
     descriptors     'T'   'P'
-    lower_bounds   12.0   1.0
-    upper_bounds   16.0   2.0
+    lower_bounds   12.8   1.4
+    upper_bounds   15.8   1.8
 
 interface
   fork
