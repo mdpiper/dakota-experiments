@@ -21,6 +21,8 @@ def cleanup_experiment(experiment):
         remove(fname)
     for dname in glob.glob(os.path.join(experiment, 'step.*')):
         shutil.rmtree(dname)
+    for dname in glob.glob(os.path.join(experiment, 'run.*')):
+        shutil.rmtree(dname)
 
 
 def main():

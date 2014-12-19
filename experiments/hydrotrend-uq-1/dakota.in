@@ -37,7 +37,7 @@ interface
   parameters_file = 'params.in'
   results_file    = 'results.out'
   work_directory directory_tag
-  named 'step' file_save  directory_save 
+  named 'run' file_save  directory_save 
   aprepro
 
 responses
