@@ -49,14 +49,24 @@ def test_HydroTrend_set_output_dir():
     h = HydroTrend(None, output_dir)
     assert_equal(h.output_dir, output_dir)
 
-def test_load_no_output_file():
+@raises(TypeError)
+def test_load_zero_arguments():
     '''
-    Tests return from load() when no output file is defined.
+    Tests load() when no argument is passed.
     '''
     os.chdir(os.environ['_test_hydrotrend_dir'])
     h = HydroTrend()
     r = h.load()
+
+def test_load_does_not_exist():
+    '''
+    Tests load() when a nonexistent output file is defined.
+    '''
+    os.chdir(os.environ['_test_hydrotrend_dir'])
+    h = HydroTrend()
+    r = h.load(nonfile)
     assert_is_none(r)
+
 
 
 

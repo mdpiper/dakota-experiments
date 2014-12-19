@@ -35,7 +35,7 @@ class HydroTrend(object):
         self._input_file = 'HYDRO.IN'
         self._input_template = 'HYDRO.IN.template'
         self._hypsometry_file = 'HYDRO0.HYPS'
-        self._output_file = 'HYDROASCII.QS'
+        self._output_files = ('HYDROASCII.QS')
 
         self._input_dir = os.path.join(os.curdir, 'HYDRO_IN') \
                           if indir is None else indir
@@ -117,18 +117,18 @@ class HydroTrend(object):
         self._output_dir = value
 
     @property
-    def output_file(self):
+    def output_files(self):
         '''
-        The HydroTrend output file selected for analysis.
+        A tuple of HydroTrend output files selected for analysis.
         '''
-        return self._output_file
+        return self._output_files
 
-    @output_file.setter
-    def output_file(self, value):
+    @output_files.setter
+    def output_files(self, value):
         '''
-        Sets the HydroTrend output file selected for analysis.
+        Sets the tuple of HydroTrend output files selected for analysis.
         '''
-        self._output_file = value
+        self._output_files = value
 
     def setup(self, start_dir, params_file):
         '''
@@ -152,13 +152,13 @@ class HydroTrend(object):
                          '--in-dir', self._input_dir, \
                          '--out-dir', self._output_dir])
 
-    def load(self):
+    def load(self, output_file):
         '''
         Reads a column of text containing HydroTrend output. Returns a
         numpy array, or None on an error.
         '''
         try:
-            series = np.loadtxt(self._output_file, skiprows=2)
+            series = np.loadtxt(output_file, skiprows=2)
         except (IOError, StopIteration):
             pass
         else:
@@ -169,12 +169,15 @@ class HydroTrend(object):
         Reads HydroTrend output and calculates statistics to pass back to
         Dakota.
         '''
-        shutil.copy(os.path.join(self._output_dir, self._output_file), \
-                    os.curdir)
+        # TODO: Encapsulate this block in its own fn ("calculate"?)
+        m_series = []
+        for output_file in self._output_files:
+            shutil.copy(os.path.join(self._output_dir, output_file), os.curdir)
+            series = self.load(output_file)
+            if series is not None:
+                m_series.append(np.mean(series))
+            else:
+                m_series.append(float('nan'))
+            
         labels = get_labels(params_file)
-        series = self.load()
-        if series is not None:
-            m_series = [np.mean(series), np.std(series)]
-        else:
-            m_series = [float('nan'), float('nan')]
         write_results(results_file, m_series, labels)
