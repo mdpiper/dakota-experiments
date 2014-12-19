@@ -10,25 +10,24 @@ from setuptools import setup, find_packages
 from dakota_utils import __version__, \
     run_script, cleanup_script, convert_script
 
-# Get the long description from the README file.
-def get_long_description():
-    from codecs import open
-    from os import path
-
-    here = path.abspath(path.dirname(__file__))
+# I stole this from @mcflugen.
+def read_requirements():
+    import os
+    path = os.path.dirname(os.path.abspath(__file__))
+    requirements_file = os.path.join(path, 'requirements.txt')
     try:
-        with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-            long_description = f.read()
-    except:
+        with open(requirements_file, 'r') as f:
+            requires = f.read().split()
+    except IOError:
         return []
     else:
-        return long_description
+        return [r.split() for r in requires]
 
 setup(
     name='dakota_utils',
     version=__version__,
     description='Systems analysis computer experiments on CSDMS models',
-    long_description=get_long_description(),
+    long_description=open('README.md').read(),
     url='https://github.com/mdpiper/dakota-experiments',
     author='Mark Piper',
     author_email='mark.piper@colorado.edu',
@@ -42,7 +41,7 @@ setup(
     ],
     keywords='CSDMS, earth systems modeling, DAKOTA, systems analysis',
     packages=find_packages(exclude=['*.tests']),
-    install_requires=['numpy', 'matplotlib', 'scipy'],
+    install_requires=read_requirements(),
     entry_points={
         'console_scripts': [
             run_script + ' = dakota_utils.run:main',
