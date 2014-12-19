@@ -6,5 +6,8 @@ python:
 os:
   - linux
 
+install:
+  - apt-get install python-scipy python-matplotlib
+
 script: 
   - nosetests
