@@ -15,8 +15,9 @@ method
     seed = 17
     samples = 24
     response_levels = 
-        50  60  70  80  90 100
-       100 120 140 160 180 200
+        65  70  75  80  85  90
+        20  25  30  35  40  45
+         0   1   2   3   4   5
     distribution cumulative
 
 # T = Mean annual temperature (deg C)
@@ -40,7 +41,7 @@ interface
   aprepro
 
 responses
-  response_functions = 2
-  response_descriptors = 'Q_mean' 'Q_stdev'
+  response_functions = 3
+  response_descriptors = 'Q_m' 'Qs_m' 'Qb_m'
   no_gradients
   no_hessians

@@ -20,7 +20,7 @@ def main():
     results_file = sys.argv[2]
 
     h = hydrotrend.HydroTrend()
-    h.output_file = 'HYDROASCII.Q'
+    h.output_files = ('HYDROASCII.Q', 'HYDROASCII.QS', 'HYDROASCII.QB')
 
     # Set up the HydroTrend run, taking information from the parameters
     # file passed by Dakota.
