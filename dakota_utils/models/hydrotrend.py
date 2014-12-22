@@ -147,6 +147,18 @@ class HydroTrend(object):
         '''
         self._response_statistic = value
 
+    def summary(self):
+        '''
+        Lists current values of all properties.
+        '''
+        print('Input directory: ' + self.input_dir)
+        print('Input template: ' + self.input_template)
+        print('Input file: ' + self.input_file)
+        print('Hypsometry file: ' + self.hypsometry_file)
+        print('Output directory: ' + self.output_dir)
+        print('Output files: ' + self.output_files)
+        print('Response statistic: ' + self.response_statistic)
+
     def setup(self, start_dir, params_file):
         '''
         Set up HydroTrend inputs. Use the Dakota parsing utility `dprepro`
