@@ -18,8 +18,8 @@ def main():
         return
 
     # The files and statistic used in the Dakota response.
-    h.output_files = ('HYDROASCII.Q', 'HYDROASCII.QS', 'HYDROASCII.QB')
-    h.response_statistic = 'median'
+    h.output_files = ('HYDROASCII.QS',)
+    h.response_statistic = 'mean'
 
     # References to files passed by Dakota.
     params_file = sys.argv[1]
