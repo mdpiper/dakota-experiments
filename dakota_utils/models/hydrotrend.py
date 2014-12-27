@@ -206,7 +206,7 @@ class HydroTrend(object):
                 if self._response_statistic == 'sum':
                     response.append(np.sum(series))
                 elif self._response_statistic == 'std':
-                    response.append(np.stdev(series))
+                    response.append(np.std(series))
                 elif self._response_statistic == 'max':
                     response.append(np.max(series))
                 elif self._response_statistic == 'median':
