@@ -1,0 +1,51 @@
+# A Dakota uncertainty quantification (UQ) experiment with
+# Delft3D. See README.md for a description.
+#
+# Call with:
+#   $ dakota -i dakota.in -o dakota.out &> run.log
+#
+# Mark Piper (mark.piper@colorado.edu)
+
+environment
+  tabular_graphics_data
+    tabular_graphics_file = 'dakota.dat'
+
+method
+  # polynomial_chaos
+  #   quadrature_order = 3
+  #   dimension_preference = 3 2
+  #   samples = 10000
+  #   seed = 17 rng rnum2
+  #   response_levels = 
+  #      3.0  3.5  4.0  4.5  5.0
+  #   variance_based_decomp
+  sampling
+    sample_type lhs
+    samples = 24
+    seed = 17
+    response_levels = 
+	3.0 3.5 4.0 4.5 5.0
+    distribution cumulative
+
+variables
+  uniform_uncertain = 2
+    descriptors     'T'   'P'
+    lower_bounds   12.8   1.4
+    upper_bounds   15.8   1.8
+
+interface
+  fork
+  asynchronous
+  evaluation_concurrency = 2
+  analysis_driver = 'run_delft3d.py'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  work_directory directory_tag
+  named 'run' file_save  directory_save 
+  aprepro
+
+responses
+  response_functions = 1
+  response_descriptors = '_Qs'
+  no_gradients
+  no_hessians
