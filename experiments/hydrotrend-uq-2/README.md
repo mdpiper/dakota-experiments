@@ -85,7 +85,7 @@ $ dakota_run .
 
 ## Results
 
-Be sure to view the statistics listed at the end of the 
+These are the statistics listed at the end of the 
 **dakota.out** file.
 
 ```
