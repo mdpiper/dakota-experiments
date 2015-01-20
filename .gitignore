@@ -60,3 +60,4 @@ target/
 *.dat
 *.out
 run.log
+dakota.rst
