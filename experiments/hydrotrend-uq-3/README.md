@@ -8,9 +8,9 @@ a stochastic collocation technique
 similar to the PCE technique
 used in **hydrotrend-uq-2**,
 and with nearly identical settings.
-The significant departure from the former experiment is
+A significant departure from the former experiment is
 the input parameters `T` and `P`
-are expressed as normally distributed random variables,
+are expressed as normally distributed uncertain variables,
 with means and standard deviations
 taken from the defaults in WMT.
 
