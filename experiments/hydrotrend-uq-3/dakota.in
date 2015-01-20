@@ -1,0 +1,44 @@
+# A Dakota uncertainty quantification (UQ) experiment with
+# HydroTrend. See README.md for a description.
+#
+# Call with:
+#   $ dakota -i dakota.in -o dakota.out &> run.log
+#
+# Mark Piper (mark.piper@colorado.edu)
+
+environment
+  tabular_graphics_data
+    tabular_graphics_file = 'dakota.dat'
+
+method
+  stoch_collocation
+    quadrature_order = 3
+    dimension_preference = 3 2
+    samples = 10000
+    seed = 17 rng rnum2
+    response_levels = 
+       3.0  3.5  4.0  4.5  5.0
+    variance_based_decomp
+
+variables
+  normal_uncertain = 2
+    descriptors       'T'   'P'
+    means           14.26  1.59
+    std_deviations   0.55  0.30
+
+interface
+  fork
+  asynchronous
+  evaluation_concurrency = 2
+  analysis_driver = 'run_hydrotrend.py'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  work_directory directory_tag
+  named 'run' file_save  directory_save 
+  aprepro
+
+responses
+  response_functions = 1
+  response_descriptors = '_Qs'
+  no_gradients
+  no_hessians
