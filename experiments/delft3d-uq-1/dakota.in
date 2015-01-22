@@ -8,7 +8,7 @@
 
 environment
   tabular_graphics_data
-    tabular_graphics_file = 'dakota.dat'
+    tabular_data_file = 'dakota.dat'
 
 method
   # polynomial_chaos
