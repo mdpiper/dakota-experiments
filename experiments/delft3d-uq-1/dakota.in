@@ -11,27 +11,29 @@ environment
     tabular_data_file = 'dakota.dat'
 
 method
-  # polynomial_chaos
-  #   quadrature_order = 3
-  #   dimension_preference = 3 2
-  #   samples = 10000
-  #   seed = 17 rng rnum2
-  #   response_levels = 
-  #      3.0  3.5  4.0  4.5  5.0
-  #   variance_based_decomp
-  sampling
-    sample_type lhs
-    samples = 24
-    seed = 17
+  polynomial_chaos
+    quadrature_order = 5
+    # dimension_preference = 3 2
+    samples = 10000
+    seed = 17 rng rnum2
     response_levels = 
-	3.0 3.5 4.0 4.5 5.0
-    distribution cumulative
+       3.0  3.5  4.0  4.5  5.0
+    variance_based_decomp
 
+# Sediment parameters are listed in file 'WLD.sed'.
+# Sand and silt grain sizes are in [m].
+# Mud critical shear stress is in [N/m2].
 variables
-  uniform_uncertain = 2
-    descriptors     'T'   'P'
-    lower_bounds   12.8   1.4
-    upper_bounds   15.8   1.8
+  normal_uncertain = 2
+    descriptors   'Sand-SedDia'   'Silt-SedDia'
+    means               1.0e-4          3.0e-5
+    std_deviations      2.2e-5          1.1e-5 # placeholders
+    lower_bounds       6.25e-5          8.0e-6
+    upper_bounds        2.0e-4         6.25e-5
+  uniform_uncertain = 1
+    descriptors   'Mud-TcrEro'
+    lower_bounds       1.0e-1
+    upper_bounds       1.0e+0
 
 interface
   fork
