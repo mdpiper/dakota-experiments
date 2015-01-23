@@ -27,7 +27,7 @@ variables
   normal_uncertain = 2
     descriptors   'Sand-SedDia'   'Silt-SedDia'
     means               1.0e-4          3.0e-5
-    std_deviations      2.2e-5          1.1e-5 # placeholders
+    std_deviations     2.28e-5         2.73e-5
     lower_bounds       6.25e-5          8.0e-6
     upper_bounds        2.0e-4         6.25e-5
   uniform_uncertain = 1
