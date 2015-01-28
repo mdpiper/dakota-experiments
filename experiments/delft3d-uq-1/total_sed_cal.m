@@ -1,7 +1,10 @@
+p = '/scratch/fexi8823/delft3d_openearth/applications/delft3d_matlab'
+addpath(genpath(p))
 load('nesting.txt');
-Nfs=vs_use('trim-WLD.dat');
-DPS=vs_let(Nfs,'map-sed-series',{1:278},'DPS',{1:243 0});
-area=vs_let(Nfs,'map-const','GSQS',{1:243 0});
+f = '/scratch/mapi8461/delft3d-01/trim-WLD.dat'
+Nfs=vs_use(f);
+DPS=vs_let(Nfs,'map-sed-series',{1:278},'DPS',{1:242 0});
+area=vs_let(Nfs,'map-const','GSQS',{1:242 0});
 
 for l=1:12393
     for j=70:336
