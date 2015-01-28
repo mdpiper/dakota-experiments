@@ -1,8 +1,14 @@
+# A MATLAB to calculate response statistics from Delft3D output.
+#
+# Fei Xing
+# Modified by Mark Piper (mark.piper@colorado.edu)
+
 p = '/scratch/fexi8823/delft3d_openearth/applications/delft3d_matlab'
 addpath(genpath(p))
 load('nesting.txt');
-f = '/scratch/mapi8461/delft3d-01/trim-WLD.dat'
-Nfs=vs_use(f);
+
+output_file = '/scratch/mapi8461/delft3d-01/trim-WLD.dat'
+Nfs=vs_use(output_file);
 DPS=vs_let(Nfs,'map-sed-series',{1:278},'DPS',{1:242 0});
 area=vs_let(Nfs,'map-const','GSQS',{1:242 0});
 
@@ -20,7 +26,7 @@ for l=1:12393
     end
     
     for i=1:12393
-        tot_sed(i)=sed(i,188)-sed(i,89);
+        tot_sed(i)=sed(i,89)-sed(i,188);
     end
     
     
