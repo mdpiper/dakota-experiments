@@ -15,9 +15,11 @@ method
     quadrature_order = 5
     # dimension_preference = 3 2
     samples = 10000
-    seed = 17 rng rnum2
+    seed = 17 
     response_levels = 
-       3.0  3.5  4.0  4.5  5.0
+      5.0e4 1.0e5 2.0e5 5.0e5 1.0e6 2.0e6 5.0e6 ## TotalSed
+      1.0e5 2.0e5 5.0e5 1.0e6 2.0e6 5.0e6 1.0e7 ## TotalAgr
+      1.4e5 2.8e5 7.0e5 1.4e6 2.8e6 7.0e6 1.4e7 ## TotalEro
     variance_based_decomp
 
 # Sediment parameters are listed in file 'WLD.sed'.
@@ -38,13 +40,12 @@ variables
 interface
   fork
   asynchronous
-  evaluation_concurrency = 2
+  evaluation_concurrency = 5
   analysis_driver = 'run_delft3d.py'
   parameters_file = 'params.in'
   results_file    = 'results.out'
   file_tag 
   file_save
-  aprepro
 
 responses
   response_functions = 3
