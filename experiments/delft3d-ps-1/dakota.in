@@ -1,0 +1,40 @@
+# A Dakota parameter study experiment with Delft3D. See README.md for
+# a description.
+#
+# Call with:
+#   $ dakota -i dakota.in -o dakota.out &> run.log
+#
+# Mark Piper (mark.piper@colorado.edu)
+
+environment
+  tabular_graphics_data
+    tabular_data_file = 'dakota.dat'
+
+method
+  vector_parameter_study
+    final_point = 2.0e-4 6.25e-5 1.0e+0
+    num_steps = 3
+
+# Sediment parameters are listed in file 'WLD.sed'.
+# Sand and silt grain sizes are in [m].
+# Mud critical shear stress is in [N/m2].
+variables
+  continuous_design = 3
+    descriptors   'Sand-SedDia' 'Silt-SedDia' 'Mud-TcrEro'
+    initial_point       1.0e-4        3.0e-5       4.0e-1
+
+interface
+  fork
+  asynchronous
+  evaluation_concurrency = 2
+  analysis_driver = 'run_delft3d.py'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  file_tag 
+  file_save
+
+responses
+  response_functions = 3
+  response_descriptors = 'TotalSed' 'TotalAgr' 'TotalEro'
+  no_gradients
+  no_hessians
