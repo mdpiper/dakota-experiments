@@ -10,6 +10,7 @@ environment
   tabular_graphics_data
     tabular_data_file = 'dakota.dat'
 
+# There are num_steps + 1 = 4 evaluations.
 method
   vector_parameter_study
     final_point = 2.0e-4 6.25e-5 1.0e+0
@@ -26,7 +27,7 @@ variables
 interface
   fork
   asynchronous
-  evaluation_concurrency = 2
+  evaluation_concurrency = 4
   analysis_driver = 'run_delft3d.py'
   parameters_file = 'params.in'
   results_file    = 'results.out'
