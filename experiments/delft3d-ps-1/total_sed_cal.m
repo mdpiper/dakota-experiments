@@ -16,7 +16,7 @@ addpath(genpath(delft3d_lib_path));
 load('nesting.txt');
 
 % Load Delft3D output.
-delft3d_output = '/scratch/mapi8461/delft3d-01/trim-WLD.dat'
+delft3d_output = 'trim-WLD.dat'
 Nfs=vs_use(delft3d_output);
 DPS=vs_let(Nfs,'map-sed-series',{1:278},'DPS',{1:242 0});
 area=vs_let(Nfs,'map-const','GSQS',{1:242 0});
