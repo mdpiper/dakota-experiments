@@ -31,7 +31,10 @@ interface
   analysis_driver = 'run_delft3d.py'
   parameters_file = 'params.in'
   results_file    = 'results.out'
-  file_tag 
+  work_directory 
+    named 'run'
+    directory_tag
+    directory_save ## remove this after testing
   file_save
 
 responses
