@@ -56,4 +56,4 @@ for i=1:12393
 end
 
 % Save results to a text file.
-save('results.out', 'total_sed1', 'total_agr', 'total_ero', '-ascii')
+save('total_sed_cal.out', 'total_sed1', 'total_agr', 'total_ero', '-ascii')

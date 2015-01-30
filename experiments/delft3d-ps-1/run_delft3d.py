@@ -19,8 +19,9 @@ def main():
     input_template = 'WLD.sed.template'
     input_file = 'WLD.sed'
     cells_file = 'nesting.txt'
-    analysis_program_file = 'total_sed_cal.m'
-    analysis_results_file = 'results.out'
+    analysis_program = 'total_sed_cal'
+    analysis_program_file = analysis_program + '.m'
+    analysis_results_file = analysis_program + '.out'
 
     # Copy the contents of the initialize directory into the current
     # run directory. (Don't use shutil.copytree because the
@@ -41,9 +42,9 @@ def main():
     # desired responses, and write the Dakota results file.
     shutil.copy(os.path.join(start_dir, cells_file), os.getcwd())
     shutil.copy(os.path.join(start_dir, analysis_program_file), os.getcwd())
-    matlab_call = '"' + os.path.splitext(analysis_program_file)[0] + '; exit"'
+    matlab_call = '"' + analysis_program + '; exit"'
     call(['matlab', '-nojvm', '-nodisplay', '-nosplash', '-r', matlab_call])
-    # shutil.move(analysis_results_file, sys.argv[2])
+    shutil.move(analysis_results_file, sys.argv[2])
 
 if __name__ == '__main__':
     main()
