@@ -37,6 +37,7 @@ interface
     directory_save ## remove this after testing
   file_save
 
+# Total sediment, accretion and erosion are in [m3].
 responses
   response_functions = 3
   response_descriptors = 'TotalSed' 'TotalAgr' 'TotalEro'
