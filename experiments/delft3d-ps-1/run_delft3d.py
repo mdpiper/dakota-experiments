@@ -43,7 +43,7 @@ def main():
     shutil.copy(os.path.join(start_dir, cells_file), os.getcwd())
     shutil.copy(os.path.join(start_dir, analysis_program_file), os.getcwd())
     matlab_call = '"' + analysis_program + '; exit"'
-    call(['matlab', '-nojvm', '-nodisplay', '-nosplash', '-r', matlab_call])
+    call(['matlab', '-nodisplay', '-nosplash', '-r', matlab_call])
     shutil.move(analysis_results_file, sys.argv[2])
 
 if __name__ == '__main__':
