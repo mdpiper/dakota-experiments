@@ -3,7 +3,7 @@
 % Call with:
 % >> total_sed_cal
 % or
-% $ matlab -nojvm -nodisplay -nosplash -r "total_sed_cal; exit"
+% $ matlab -nodisplay -nosplash -r "total_sed_cal; exit"
 %
 % Fei Xing
 % Modified by Mark Piper (mark.piper@colorado.edu)
@@ -20,11 +20,22 @@ i0_sed = 1; % 89
 i1_sed = 23; % 188
 
 % Load grid cells used in calculations.
-load('nesting.txt');
+grid_cells_file = strcat(pwd, '/nesting.txt')
+if exist(grid_cells_file, 'file')
+    load(grid_cells_file);
+else
+    msg = fprintf('Error: file does not exist: %s', grid_cells_file);
+    exit(1) % File not found
+end
 
 % Load Delft3D output.
-delft3d_output = 'trim-WLD.dat'
-Nfs=vs_use(delft3d_output);
+delft3d_output_file = strcat(pwd, '/trim-WLD.dat')
+if exist(delft3d_output_file, 'file')
+    Nfs = vs_use(delft3d_output_file);
+else
+    msg = fprintf('Error: file does not exist: %s', delft3d_output_file);
+    exit(1) % File not found
+end
 DPS=vs_let(Nfs,'map-sed-series',{1:i_max_map_sed_series},'DPS',{1:i_max_DPS 0});
 area=vs_let(Nfs,'map-const','GSQS',{1:i_max_GSQS 0});
 
