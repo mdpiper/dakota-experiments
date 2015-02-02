@@ -13,11 +13,11 @@ delft3d_lib_path = '/scratch/fexi8823/delft3d_openearth/applications/delft3d_mat
 addpath(genpath(delft3d_lib_path));
 
 % Array indices.
-i_max_map_sed_series = 23 % 278
-i_max_DPS = 242
-i_max_GSQS = 23 % 242
-i0_sed = 1 % 89
-i1_sed = 23 % 188
+i_max_map_sed_series = 23; % 278
+i_max_DPS = 242;
+i_max_GSQS = 242; % 23 
+i0_sed = 1; % 89
+i1_sed = 23; % 188
 
 % Load grid cells used in calculations.
 load('nesting.txt');
