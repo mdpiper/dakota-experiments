@@ -13,11 +13,11 @@ delft3d_lib_path = '/scratch/fexi8823/delft3d_openearth/applications/delft3d_mat
 addpath(genpath(delft3d_lib_path));
 
 % Array indices.
-i_max_map_sed_series = 23; % 278
+i_max_map_sed_series = 2; % 23; % 278;
 i_max_DPS = 242;
 i_max_GSQS = 242; % 23 
 i0_sed = 1; % 89
-i1_sed = 23; % 188
+i1_sed = 2; % 23; % 188
 
 % Load grid cells used in calculations.
 grid_cells_file = strcat(pwd, '/nesting.txt')
@@ -41,6 +41,7 @@ area=vs_let(Nfs,'map-const','GSQS',{1:i_max_GSQS 0});
 
 % Extract sediment values from grid.
 for l=1:12393
+    l
     for j=70:336
         for k=30:240
             if ( j==nesting(l,1) && k==nesting(l,2) )
@@ -76,3 +77,4 @@ end
 % Save results to a text file.
 s = dbstack()
 save(strcat(s.name, '.out'), 'total_sed1', 'total_agr', 'total_ero', '-ascii')
+
