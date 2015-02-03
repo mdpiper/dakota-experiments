@@ -5,8 +5,14 @@
 import sys
 import os
 import shutil
-from subprocess import call
+from subprocess import call, check_output
 import time
+
+def job_is_running(job_id):
+    '''
+    Returns True if the PBS job with the given id is running.
+    '''
+    return call(['qstat', job_id]) == 0
 
 def main():
     '''
@@ -37,12 +43,12 @@ def main():
     call(['dprepro', sys.argv[1], input_template, input_file])
 
     # Call Delft3D, using the updated input file. Note that `qsub`
-    # returns immediately with the PBS job ids.
-    call(['qsub', 'run_delft3d_wave.sh'])
+    # returns immediately with the PBS job id.
+    r = check_output(['qsub', 'run_delft3d_wave.sh'])
+    job_id = r.rstrip('\n')
 
-    # Poll for the required Delft3D output file every 10 min. Proceed
-    # when file exists.
-    while os.path.exists(output_file) is False:
+    # Poll the Delft3D job every 10 min. Proceed when it's finished.
+    while job_is_running(job_id):
         time.sleep(600)
 
     # Call a MATLAB script to read the Delft3D output, calculate the
@@ -52,7 +58,7 @@ def main():
     print('Current directory: ' + os.getcwd())
     matlab_call = '-r "' + analysis_program + '; exit"'
     r = call(['matlab', '-nodisplay', '-nosplash', matlab_call])
-    print('Exit status code = ' + str(r))
+    print('MATLAB exit status code = ' + str(r))
     shutil.move(analysis_results_file, sys.argv[2])
 
 if __name__ == '__main__':
