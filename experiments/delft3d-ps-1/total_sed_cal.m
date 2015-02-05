@@ -8,8 +8,10 @@
 % Fei Xing
 % Modified by Mark Piper (mark.piper@colorado.edu)
 
+pwd
+
 % Include Delft3D library routines in path.
-delft3d_lib_path = '/scratch/fexi8823/delft3d_openearth/applications/delft3d_matlab'
+delft3d_lib_path = '/scratch/mapi8461/Delft3D-MATLAB'
 addpath(genpath(delft3d_lib_path));
 
 % Array indices.
@@ -28,7 +30,7 @@ else
     exit(1) % File not found
 end
 
-% Load Delft3D output.
+% Load Delft3D output using Delft3D-MATLAB tools.
 delft3d_output_file = strcat(pwd, '/trim-WLD.dat')
 if exist(delft3d_output_file, 'file')
     Nfs = vs_use(delft3d_output_file);
@@ -36,12 +38,12 @@ else
     fprintf('Error: file does not exist: %s\n', delft3d_output_file);
     exit(1) % File not found
 end
-DPS=vs_let(Nfs,'map-sed-series',{1:i_max_map_sed_series},'DPS',{1:i_max_DPS 0});
-area=vs_let(Nfs,'map-const','GSQS',{1:i_max_GSQS 0});
+DPS = vs_let(Nfs, 'map-sed-series', {1:i_max_map_sed_series}, ...
+	     'DPS', {1:i_max_DPS 0}, 'quiet!');
+area = vs_let(Nfs, 'map-const', 'GSQS', {1:i_max_GSQS 0}, 'quiet!');
 
 % Extract sediment values from grid.
 for l=1:12393
-    l
     for j=70:336
         for k=30:240
             if ( j==nesting(l,1) && k==nesting(l,2) )
