@@ -26,8 +26,8 @@ variables
 
 interface
   fork
-  # asynchronous
-  # evaluation_concurrency = 2
+  asynchronous
+  evaluation_concurrency = 4
   analysis_driver = 'run_delft3d.py'
   parameters_file = 'params.in'
   results_file    = 'results.out'
