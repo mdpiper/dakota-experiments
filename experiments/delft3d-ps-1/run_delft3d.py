@@ -24,7 +24,6 @@ def main():
     initialize_dir = os.path.join(start_dir, 'initialize')
     input_template = 'WLD.sed.template'
     input_file = 'WLD.sed'
-    output_file = 'trim-WLD.dat'
     cells_file = 'nesting.txt'
     analysis_program = 'total_sed_cal'
     analysis_program_file = analysis_program + '.m'
@@ -56,8 +55,8 @@ def main():
     shutil.copy(os.path.join(start_dir, cells_file), os.getcwd())
     shutil.copy(os.path.join(start_dir, analysis_program_file), os.getcwd())
     print('Current directory: ' + os.getcwd())
-    matlab_call = '-r "' + analysis_program + '; exit"'
-    r = call(['matlab', '-nodisplay', '-nosplash', matlab_call])
+    matlab_cmd = '-r "' + analysis_program + '; exit"'
+    r = call(['matlab', '-nodisplay', '-nosplash', matlab_cmd])
     print('MATLAB exit status code = ' + str(r))
     shutil.move(analysis_results_file, sys.argv[2])
 
