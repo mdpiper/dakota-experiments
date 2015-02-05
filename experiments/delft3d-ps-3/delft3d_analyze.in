@@ -1,0 +1,47 @@
+# A Dakota parameter study experiment with Delft3D. See README.md for
+# a description.
+#
+# Call with:
+#   $ dakota -i delft3d_analyze.in -o dakota.out
+#
+# Note: The Dakota process must be in the foreground, else MATLAB won't work.
+#
+# Mark Piper (mark.piper@colorado.edu)
+
+environment
+  tabular_graphics_data
+    tabular_data_file = 'dakota.dat'
+
+# There are num_steps + 1 = 4 evaluations.
+method
+  vector_parameter_study
+    final_point = 2.0e-4 6.25e-5 1.0e+0
+    num_steps = 3
+
+# Sediment parameters are listed in file 'WLD.sed'.
+# Sand and silt grain sizes are in [m].
+# Mud critical shear stress is in [N/m2].
+variables
+  continuous_design = 3
+    descriptors   'Sand-SedDia' 'Silt-SedDia' 'Mud-TcrEro'
+    initial_point       1.0e-4        3.0e-5       4.0e-1
+
+# Run Dakota in serial on a login node, calling a MATLAB script to
+# analyze the output from the eponymous Delft3D Dakota run.
+interface
+  fork
+  analysis_driver = 'delft3d_analyze.py'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  work_directory 
+    named 'run'
+    directory_tag
+    directory_save
+  file_save
+
+# Total sediment, accretion and erosion are in [m3].
+responses
+  response_functions = 3
+  response_descriptors = 'TotalSed' 'TotalAgr' 'TotalEro'
+  no_gradients
+  no_hessians
