@@ -1,0 +1,56 @@
+# A Dakota uncertainty quantification (UQ) experiment with
+# Delft3D. See README.md for a description.
+#
+# Call with:
+#   $ dakota -i delft3d_run.in &> delft3d_run.log &
+#
+# Mark Piper (mark.piper@colorado.edu)
+
+# There are quadrature_order^n_variables = 27 evaluations.
+method
+  polynomial_chaos
+    quadrature_order = 3
+    samples = 10000
+    seed = 17 
+    response_levels = 
+      -10.0e5 -8.0e5 -6.0e5 -4.0e5 -2.0e5 ## TotalSed
+      1.0e5 1.5e5 2.0e5 2.5e5 3.0e5 ## TotalAgr
+      -12.0e5 -10.0e5 -8.0e5 -6.0e5 -4.0e5 ## TotalEro
+    variance_based_decomp
+
+# Sediment parameters are listed in file 'WLD.sed'.
+# Sand and silt grain sizes are in [m].
+# Mud critical shear stress is in [N/m2].
+variables
+  normal_uncertain = 2
+    descriptors   'Sand-SedDia'   'Silt-SedDia'
+    means               1.0e-4          3.0e-5
+    std_deviations     2.28e-5         2.73e-5
+    lower_bounds       6.25e-5          8.0e-6
+    upper_bounds        2.0e-4         6.25e-5
+  uniform_uncertain = 1
+    descriptors   'Mud-TcrEro'
+    lower_bounds       1.0e-1
+    upper_bounds       1.0e+0
+
+# Run Dakota with asynchronous local parallelism on a login
+# node. Launch each Delft3D job into the queue with `qsub` call.
+interface
+  fork
+  asynchronous
+  evaluation_concurrency = 5
+  analysis_driver = 'delft3d_run.py'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  work_directory 
+    named 'run'
+    directory_tag
+    directory_save
+  file_save
+
+# Total sediment, accretion and erosion are in [m3].
+responses
+  response_functions = 3
+  response_descriptors = 'TotalSed' 'TotalAgr' 'TotalEro'
+  no_gradients
+  no_hessians

@@ -2,7 +2,9 @@
 # Delft3D. See README.md for a description.
 #
 # Call with:
-#   $ dakota -i dakota.in -o dakota.out &> run.log
+#   $ dakota -i delft3d_analyze.in -o dakota.out
+#
+# Note: The Dakota process must be in the foreground, else MATLAB won't work.
 #
 # Mark Piper (mark.piper@colorado.edu)
 
@@ -10,16 +12,19 @@ environment
   tabular_graphics_data
     tabular_data_file = 'dakota.dat'
 
+# There are quadrature_order^n_variables = 27 evaluations.
 method
   polynomial_chaos
-    quadrature_order = 5
-    # dimension_preference = 3 2
+    quadrature_order = 3
     samples = 10000
     seed = 17 
     response_levels = 
-      5.0e4 1.0e5 2.0e5 5.0e5 1.0e6 2.0e6 5.0e6 ## TotalSed
-      1.0e5 2.0e5 5.0e5 1.0e6 2.0e6 5.0e6 1.0e7 ## TotalAgr
-      1.4e5 2.8e5 7.0e5 1.4e6 2.8e6 7.0e6 1.4e7 ## TotalEro
+      # 5.0e4 1.0e5 2.0e5 5.0e5 1.0e6 2.0e6 5.0e6 ## TotalSed
+      -10.0e5 -8.0e5 -6.0e5 -4.0e5 -2.0e5 ## TotalSed
+      # 1.0e5 2.0e5 5.0e5 1.0e6 2.0e6 5.0e6 1.0e7 ## TotalAgr
+      1.0e5 1.5e5 2.0e5 2.5e5 3.0e5 ## TotalAgr
+      # 1.4e5 2.8e5 7.0e5 1.4e6 2.8e6 7.0e6 1.4e7 ## TotalEro
+      -12.0e5 -10.0e5 -8.0e5 -6.0e5 -4.0e5 ## TotalEro
     variance_based_decomp
 
 # Sediment parameters are listed in file 'WLD.sed'.
@@ -37,16 +42,20 @@ variables
     lower_bounds       1.0e-1
     upper_bounds       1.0e+0
 
+# Run Dakota in serial on a login node, calling a MATLAB script to
+# analyze the output from the eponymous Delft3D Dakota run.
 interface
   fork
-  asynchronous
-  evaluation_concurrency = 5
-  analysis_driver = 'run_delft3d.py'
+  analysis_driver = 'delft3d_analyze.py'
   parameters_file = 'params.in'
   results_file    = 'results.out'
-  file_tag 
+  work_directory 
+    named 'run'
+    directory_tag
+    directory_save
   file_save
 
+# Total sediment, accretion and erosion are in [m3].
 responses
   response_functions = 3
   response_descriptors = 'TotalSed' 'TotalAgr' 'TotalEro'
