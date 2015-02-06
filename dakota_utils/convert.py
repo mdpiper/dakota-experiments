@@ -30,7 +30,7 @@ def strip_interface_column(tab_file):
     try:
         bak_file = tab_file + '.orig'
         shutil.copyfile(tab_file, bak_file)
-        cmd = 'cat ' + bak_file +' | colrm 9 18 > ' + tab_file
+        cmd = 'cat ' + bak_file +' | colrm 10 18 > ' + tab_file
         check_call(cmd, shell=True)
     except (IOError, CalledProcessError):
         raise
