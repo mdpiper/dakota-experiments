@@ -1,9 +1,41 @@
 # Delft3D UQ 1
 
 This is an uncertainty quantification (UQ) experiment
-with Delft3D.
+with [Delft3D](http://oss.deltares.nl/web/delft3d).
+
+In this experiment,
+the polynomial chaos expansion (PCE) technique 
+(see also **hydrotrend-uq-2**)
+is used
+to measure the effects of varying three parameters:
+
+* sand diameter (`Sand-SedDia`),
+* silt diameter (`Silt-SedDia`), and
+* critical shear stress of erosion (`Mud-TcrEro`)
+
+on three model responses:
+
+* total sedimentation (`TotalSed`),
+* total accretion (`TotalAgr`), and
+* total erosion (`TotalEro`).
+
+A third-order PCE is chosen.
+Latin Hypercube sampling
+is used to select three values for each parameter
+from their distribution.
+Therefore,
+the number of model runs is:
+
+    n_values^n_parameters = 3^3 = 27
+
+Two calls to Dakota are required to run this experiment;
+one to set up the Delft3D runs on ***beach***,
+the other to analyze the results.
+Details are given below.
 
 ## Files
+
+This table describes the files used in this experiment.
 
 | File | Purpose |
 | ---- | ------- |
@@ -11,11 +43,10 @@ with Delft3D.
 | **delft3d_run.py** | Analysis driver for **delft3d_run.in**. |
 | **delft3d_analyze.in** | Dakota input file that calls **total_sed_cal.m** to analysze the results of each Delft3D run. |
 | **delft3d_analyze.py** | Analysis driver for **delft3d_analysis.in**. |
-| **WLD.sed.template** | The Delft3D input file, containing sediment parameters that will be perturbed. |
-| **fake.out** | A Dakota results file containing dummy values. |
-| **nesting.txt** | A two-column text file that lists the output cells within the calculating area. |
+| **WLD.sed.template** | A template for the Delft3D input file, containing sediment parameters that will be varied. |
+| **fake.out** | A Dakota results file containing dummy values, used to advance Dakota after submitting a Delft3D run. |
 | **total_sed_cal.m** | A MATLAB program used to calculate the response statistics from Delft3D output. |
-
+| **nesting.txt** | A two-column text file that lists the output cells used in the analysis of the results. |
 
 ## Execution
 
@@ -26,16 +57,30 @@ the series of Delft3D jobs to the queue manager:
 $ dakota -i delft3d_run.in &> delft3d_run.log &
 ```
 The Dakota process exits fairly quickly,
-but the Delft3D runs will take much longer;
+but the Delft3D runs take much longer;
 monitor the queue to see when they're complete.
-(**TODO**: Write a script that polls the queue
-and emails you when the runs are complete.)
-When all the Delft3D runs are finished,
+The analysis driver also copies the file **fake.out**
+to the run directory
+so Dakota will advance.
+No statistics are calculated in this first call!
+
+When all of the Delft3D runs are finished,
 call Dakota again with **delft3d_analyze.in** to analyze the results:
 ```bash
 $ dakota -i delft3d_analyze.in -o dakota.out
 ```
-Note that this command can't be backgrounded -- the Delft3D-MATLAB
+The analysis driver
+calls the MATLAB script in **total_sed_cal.m**
+to calculate `TotalSed`, `TotalAgr`, and `TotalEro`,
+then write the results to the "real" Dakota results file.
+The tabular data file **dakota.dat**,
+containing the Delft3D input and output values,
+and the Dakota output file **dakota.out**,
+containing the results of the UQ,
+are returned in this step.
+
+Note that the second Dakota call
+can't be backgrounded -- the Delft3D-MATLAB
 library function used in **total_sed_cal.m** will hang,
 terminating the process with no error message.
 
