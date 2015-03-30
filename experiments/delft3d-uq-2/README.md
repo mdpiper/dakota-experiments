@@ -49,10 +49,10 @@ This table describes the files used in this experiment.
 | ---- | ------- |
 | **delft3d_run.in** | Dakota input file that submits Delft3D jobs to queue. |
 | **delft3d_run.py** | Analysis driver for **delft3d_run.in**. |
-| **delft3d_analyze.in** | Dakota input file that calls **total_sed_cal.m** to analysze the results of each Delft3D run. |
-| **delft3d_analyze.py** | Analysis driver for **delft3d_analysis.in**. |
-| **WLD.sed.template** | A template for the Delft3D input file, containing sediment parameters that will be varied. |
-| **fake.out** | A Dakota results file containing dummy values, used to advance Dakota after submitting a Delft3D run. |
+| **WLD.sed.template** | A template for **delft3d_run.in**, containing sediment parameters that will be varied. The `dprepro` program creates a new **WLD.sed** file from this template. |
+| **fake.out** | A Dakota results file containing dummy values, used to advance Dakota after submitting a Delft3D run with **delft3d_run.in**. |
+| **delft3d_analyze.in** | Dakota input file that analyzes the results of the Delft3D runs. |
+| **delft3d_analyze.py** | Analysis driver for **delft3d_analysis.in**; calls **total_sed_cal.m**. |
 | **total_sed_cal.m** | A MATLAB program used to calculate the response statistics from Delft3D output. |
 | **nesting.txt** | A two-column text file that lists the output cells used in the analysis of the results. |
 
@@ -60,12 +60,13 @@ This table describes the files used in this experiment.
 
 This experiment requires two calls to Dakota.
 The first call uses **delft3d_run.in** to submit
-the series of Delft3D jobs to the queue manager:
+the series of Delft3D jobs to the queue manager
+on ***beach***:
 ```bash
 $ dakota -i delft3d_run.in &> delft3d_run.log &
 ```
 The Dakota process exits fairly quickly,
-but the Delft3D runs take much longer;
+but the Delft3D runs take about three days;
 monitor the queue to see when they're complete.
 The analysis driver also copies the file **fake.out**
 to the run directory
@@ -73,7 +74,7 @@ so Dakota will advance.
 No statistics are calculated in this first call!
 
 When all of the Delft3D runs are finished,
-call Dakota again with **delft3d_analyze.in** to analyze the results:
+call Dakota again with **delft3d_analyze.in** to process the results:
 ```bash
 $ dakota -i delft3d_analyze.in -o dakota.out
 ```
@@ -91,6 +92,10 @@ Note that the second Dakota call
 can't be backgrounded -- the Delft3D-MATLAB
 library function used in **total_sed_cal.m** will hang,
 terminating the process with no error message.
+This is also why the `output_filter` keyword 
+(which would've allowed a single call to Dakota,
+instead of two)
+wasn't used in the experiment.
 
 ## Results
 
