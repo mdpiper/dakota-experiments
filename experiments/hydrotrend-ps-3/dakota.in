@@ -1,0 +1,32 @@
+# Dakota input file
+environment
+  tabular_data
+    tabular_data_file = 'dakota.dat'
+
+method
+  vector_parameter_study
+    final_point = 20.0 2.5
+    num_steps = 5
+
+variables
+  continuous_design = 2
+    descriptors    'T'    'P'
+    lower_bounds   10.0   1.5
+
+interface
+  fork
+  analysis_driver = 'run_model.py'
+  analysis_component = 'hydrotrend'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  work_directory
+    named 'run' 
+    directory_tag
+    directory_save 
+  file_save 
+
+responses
+  response_functions = 1
+  response_descriptors = 'Qs_median'
+  no_gradients
+  no_hessians
