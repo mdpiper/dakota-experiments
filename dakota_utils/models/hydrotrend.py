@@ -23,6 +23,9 @@ def is_installed():
     else:
         return True
 
+def model():
+    """A generic function to return a HydroTrend object."""
+    return HydroTrend()
 
 class HydroTrend(object):
     '''
