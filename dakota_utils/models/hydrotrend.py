@@ -24,7 +24,22 @@ def is_installed():
         return True
 
 def model():
-    """A generic function to return a HydroTrend object."""
+    """A generic function to return a HydroTrend object.
+
+    Returns
+    -------
+    object
+      An instance of HydroTrend.
+
+    Examples
+    --------
+    Call this function instead of the class constructor to obtain a
+    HydroTrend instance.
+
+    >>> import dakota_utils.models.hydrotrend as m
+    >>> h = m.model() # instead of h = m.HydroTrend()
+
+    """
     return HydroTrend()
 
 class HydroTrend(object):
