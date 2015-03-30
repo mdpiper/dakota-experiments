@@ -25,6 +25,21 @@ def get_labels(params_file):
         return(labels)
 
 
+def get_analysis_component(params_file):
+    """Extracts the analysis component name from a Dakota parameters file."""
+    ac = ''
+    try:
+        fp = open(params_file, 'r')
+        for line in fp:
+            if re.search('AC_1', line):
+                ac = line.split('AC_1')[0].strip()
+    except IOError:
+        raise
+    finally:
+        fp.close()
+        return(ac)
+
+
 def get_names(dat_file):
     '''
     Reads the header from Dakota tabular graphics file. Returns a list
