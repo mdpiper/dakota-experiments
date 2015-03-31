@@ -14,14 +14,13 @@ def get_labels(params_file):
     '''
     labels = []
     try:
-        fp = open(params_file, 'r')
-        for line in fp:
-            if re.search('ASV_', line):
-                labels.append(''.join(re.findall(':(\S+)', line)))
-    except IOError:
-        raise
-    finally:
-        fp.close()
+        with open(params_file, 'r') as fp:
+            for line in fp:
+                if re.search('ASV_', line):
+                    labels.append(''.join(re.findall(':(\S+)', line)))
+    except IOError as e:
+        return None
+    else:
         return(labels)
 
 
@@ -66,18 +65,17 @@ def get_analysis_components(params_file):
     """
     ac = []
     try:
-        fp = open(params_file, 'r')
-        for line in fp:
-            if re.search('AC_1', line):
-                ac.append(line.split('AC_1')[0].strip())
-            elif re.search('AC_', line):
-                parts = re.split(':', re.split('AC_', line)[0])
-                ac.append({'file':parts[0].strip(),
-                           'statistic':parts[1].strip()})
-    except IOError:
-        raise
-    finally:
-        fp.close()
+        with open(params_file, 'r') as fp:
+            for line in fp:
+                if re.search('AC_1', line):
+                    ac.append(line.split('AC_1')[0].strip())
+                elif re.search('AC_', line):
+                    parts = re.split(':', re.split('AC_', line)[0])
+                    ac.append({'file':parts[0].strip(),
+                               'statistic':parts[1].strip()})
+    except IOError as e:
+        return None
+    else:
         return(ac)    
 
 

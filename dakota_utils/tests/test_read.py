@@ -40,6 +40,10 @@ def test_get_labels():
     """Test the get_labels function."""
     assert_equal(response_labels, get_labels(parameters_file))
 
+def test_get_labels_unknown_file():
+    """Test get_labels() when parameters file not found."""
+    assert_is_none(get_labels('foo.in'))
+
 def test_get_analysis_components():
     """Test the get_analysis_components function."""
     ac = get_analysis_components(parameters_file)
@@ -47,6 +51,10 @@ def test_get_analysis_components():
     response = ac.pop(0)
     assert_equal(response['file'], output_file)
     assert_equal(response['statistic'], response_statistic)
+
+def test_get_analysis_components_unknown_file():
+    """Test get_analysis_components() when parameters file not found."""
+    assert_is_none(get_analysis_components('foo.in'))
 
 def test_get_names():
     """Test the get_names function."""
