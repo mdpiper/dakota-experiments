@@ -7,15 +7,20 @@ import os
 import shutil
 import re
 import importlib
-from dakota_utils.read import get_analysis_component
+from dakota_utils.read import get_analysis_components
+
 
 def main():
     """Sets up model input, runs model, gathers output."""
 
+    # Retrieve the analysis components passed through the Dakota input file.
+    ac = get_analysis_components(sys.argv[1])
+    model = ac.pop(0)
+    response = ac.pop(0)
+
     # Which model are we using?
-    ac = get_analysis_component(sys.argv[1])
     try:
-        m = importlib.import_module('dakota_utils.models.' + ac)
+        m = importlib.import_module('dakota_utils.models.' + model)
     except ImportError:
         raise
 
@@ -26,9 +31,8 @@ def main():
         return
 
     # The files and statistic used in the Dakota response.
-    # TODO: How can I factor out these? Use additional analysis components?
-    h.output_files = ('HYDROASCII.QS',)
-    h.response_statistic = 'median'
+    h.output_files = (response['file'],)
+    h.response_statistic = response['statistic']
 
     # References to files passed by Dakota.
     params_file = sys.argv[1]

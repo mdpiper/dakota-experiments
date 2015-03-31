@@ -16,7 +16,7 @@ variables
 interface
   fork
   analysis_driver = 'run_model.py'
-  analysis_component = 'hydrotrend'
+  analysis_components = 'hydrotrend' 'HYDROASCII.QS:median'
   parameters_file = 'params.in'
   results_file    = 'results.out'
   work_directory
