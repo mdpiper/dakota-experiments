@@ -18,7 +18,7 @@ def get_labels(params_file):
             for line in fp:
                 if re.search('ASV_', line):
                     labels.append(''.join(re.findall(':(\S+)', line)))
-    except IOError as e:
+    except IOError:
         return None
     else:
         return(labels)
@@ -73,7 +73,7 @@ def get_analysis_components(params_file):
                     parts = re.split(':', re.split('AC_', line)[0])
                     ac.append({'file':parts[0].strip(),
                                'statistic':parts[1].strip()})
-    except IOError as e:
+    except IOError:
         return None
     else:
         return(ac)    
