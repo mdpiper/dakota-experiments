@@ -10,8 +10,8 @@ method
 
 variables
   continuous_design = 2
-    descriptors    'T'    'P'
-    lower_bounds   10.0   1.5
+    descriptors      'T'   'P'
+    initial_point   10.0   1.5
 
 interface
   fork
