@@ -25,19 +25,60 @@ def get_labels(params_file):
         return(labels)
 
 
-def get_analysis_component(params_file):
-    """Extracts the analysis component name from a Dakota parameters file."""
-    ac = ''
+def get_analysis_components(params_file):
+    """Extracts the analysis components from a Dakota parameters file.
+
+    The components are returned as a list. The first item is the name
+    of the model that's being examined by Dakota, followed by dicts
+    containing the output file to analyze and the statistic to apply
+    to the file. Note that this syntax is defined in the Dakota input
+    file.
+
+    Parameters
+    ----------
+    params_file : str
+      The path to a Dakota parameters file.
+
+    Returns
+    -------
+    list
+      A list of analysis components for the Dakota experiment.
+
+    Examples
+    --------
+    Extract the analysis components from a Dakota input file:
+
+    >>> ac = get_analysis_components(params_file)
+    >>> ac.pop(0)
+    'hydrotrend'
+    >>> ac.pop(0)
+    {'file': 'HYDROASCII.QS', 'statistic': 'median'}
+
+    Notes
+    -----
+
+    The syntax expected by this function is defined in the Dakota
+    input file; e.g., for the example cited above, the 'interface'
+    section of the Dakota input file contains the line:
+
+      analysis_components = 'hydrotrend' 'HYDROASCII.QS:median'
+
+    """
+    ac = []
     try:
         fp = open(params_file, 'r')
         for line in fp:
             if re.search('AC_1', line):
-                ac = line.split('AC_1')[0].strip()
+                ac.append(line.split('AC_1')[0].strip())
+            elif re.search('AC_', line):
+                parts = re.split(':', re.split('AC_', line)[0])
+                ac.append({'file':parts[0].strip(),
+                           'statistic':parts[1].strip()})
     except IOError:
         raise
     finally:
         fp.close()
-        return(ac)
+        return(ac)    
 
 
 def get_names(dat_file):
