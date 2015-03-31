@@ -4,8 +4,6 @@
 
 import sys
 import os
-import shutil
-import re
 import importlib
 from dakota_utils.read import get_analysis_components
 
