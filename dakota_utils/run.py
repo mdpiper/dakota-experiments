@@ -12,7 +12,7 @@ import time
 
 def is_dakota_installed():
     '''
-    Returns True if Dakota is installed and in the execution path; 
+    Returns True if Dakota is installed and in the execution path;
     otherwise, False.
     '''
     try:
@@ -44,10 +44,10 @@ def run_experiment(experiment):
         outfile = os.path.splitext(infile)[0] + '.out'
         os.chdir(experiment)
         start_time = time.time()
-        subprocess.check_output(['dakota', 
-                                 '-i', infile, 
-                                 '-o', outfile, 
-                                 '-no_input_echo'], 
+        subprocess.check_output(['dakota',
+                                 '-i', infile,
+                                 '-o', outfile,
+                                 '-no_input_echo'],
                                 stderr=subprocess.STDOUT)
         elapsed_time = time.time() - start_time
     except AttributeError:
@@ -66,7 +66,7 @@ def print_error_status(error):
     '''
     Displays an error summary from Dakota on a failed run.
     '''
-    print('Error: DAKOTA run failed.')    
+    print('Error: DAKOTA run failed.')
     print('Command:\n' + '\t' + str(error.cmd))
     print('Return code:\n' + '\t' + str(error.returncode))
     print('Output:')
@@ -82,11 +82,11 @@ def main():
         description="Runs a Dakota experiment on a CSDMS model.")
     parser.add_argument("experiment",
                         help="path to directory with Dakota experiment files")
-    parser.add_argument('--version', action='version', 
+    parser.add_argument('--version', action='version',
                         version=run_script + ' ' + __version__)
     args = parser.parse_args()
 
-    if is_dakota_installed() is False: 
+    if is_dakota_installed() is False:
         print('Error: DAKOTA must be installed and in the execution path.')
         return
 

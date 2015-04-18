@@ -4,6 +4,7 @@
 #
 # Mark Piper (mark.piper@colorado.edu)
 
+
 def write_results(results_file, array, labels):
     '''
     Writes a Dakota results file from an input array.

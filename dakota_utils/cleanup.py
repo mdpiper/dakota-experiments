@@ -33,7 +33,7 @@ def main():
         description="Cleans up the results of a Dakota experiment.")
     parser.add_argument("experiment",
                         help="path to directory with Dakota experiment files")
-    parser.add_argument('--version', action='version', 
+    parser.add_argument('--version', action='version',
                         version=cleanup_script + ' ' + __version__)
     args = parser.parse_args()
 

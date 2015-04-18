@@ -71,12 +71,12 @@ def get_analysis_components(params_file):
                     ac.append(line.split('AC_1')[0].strip())
                 elif re.search('AC_', line):
                     parts = re.split(':', re.split('AC_', line)[0])
-                    ac.append({'file':parts[0].strip(),
-                               'statistic':parts[1].strip()})
+                    ac.append({'file': parts[0].strip(),
+                               'statistic': parts[1].strip()})
     except IOError:
         return None
     else:
-        return(ac)    
+        return(ac)
 
 
 def get_names(dat_file):
@@ -107,4 +107,4 @@ def read_tabular(dat_file):
     '''
     names = get_names(dat_file)
     data = get_data(dat_file)
-    return {'names':names, 'data':data}
+    return {'names': names, 'data': data}
