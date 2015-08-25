@@ -44,7 +44,8 @@ def main():
     shutil.copy(input_file, input_dir)
 
     # Call HydroTrend, using the updated input file.
-    call(['hydrotrend', '--in-dir', input_dir, '--out-dir', output_dir])
+    # call(['hydrotrend', '--in-dir', input_dir, '--out-dir', output_dir])
+    call(['hydrotrend', '--in-dir', '../HYDRO_IN', '--out-dir', '../HYDRO_OUTPUT'])
 
     # Calculate mean and standard deviation of a HydroTrend output time
     # series for the simulation. Write the output to a Dakota results file.
