@@ -85,7 +85,7 @@ def main():
     shutil.copy(os.path.join(output_dir, output_file), os.curdir)
     labels = get_labels(sys.argv[1])
     series = read(output_file)
-    if series != None:
+    if series is not None:
         m_series = [np.mean(series), np.std(series)]
     else:
         m_series = [0, 0]
