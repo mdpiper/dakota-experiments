@@ -1,4 +1,4 @@
-# HydroTrend DACE 1
+# HydroTrend DACE Experiment
 
 This is a design and analysis of computer experiments (DACE) experiment
 with HydroTrend.
@@ -14,7 +14,7 @@ it will be important for models with a longer execution time.
 In this experiment,
 the same input parameters (`T`, `P`)
 and response functions (`Qs_mean`, `Qs_stdev`)
-from the **hydrotrend-ps-2** experiment
+from the **hydrotrend-multidim-parameter-study** experiment
 are used.
 The Latin Hypercube sampling (LHS) technique
 is used to obtain `N_s = 120` input points
@@ -29,7 +29,7 @@ The resulting LHS sample set
 has better coverage and less clustering
 than Monte Carlo sampling.
 
-For comparison with the output from **hydrotrend-ps-2**,
+For comparison with the output from **hydrotrend-multidim-parameter-study**,
 the results from this experiment
 are interpolated to a rectangular grid.
 
@@ -43,7 +43,7 @@ $ dakota -i dakota.in -o dakota.out &> run.log
 
 * The value of `N_s` was chosen to be one tenth the number of points
   used in the 40 x 30 gridded parameter study used in the
-  **hydrotrend-ps-2** experiment.
+  **hydrotrend-multidim-parameter-study** experiment.
 * Set ranges of `T` and `P` to avoid NaN returns,
   which give scipy.interpolate.griddata difficulties.
 * A seed value of 5 was chosen. The same seed should give same output.
