@@ -1,12 +1,12 @@
-# HydroTrend UQ 3
+# HydroTrend Stochastic Collocation Experiment
 
-This is an uncertainty quantification (UQ) experiment
-with HydroTrend.
+This is an uncertainty quantification (UQ) experiment with HydroTrend
+that uses the (awesomely named) `stochastic_collocation` method.
 
 This experiment uses
 a stochastic collocation technique
 similar to the PCE technique
-used in **hydrotrend-uq-2**,
+used in **hydrotrend-polynomial-chaos**,
 and with nearly identical settings.
 A significant departure from the former experiment is
 the input parameters `T` and `P`

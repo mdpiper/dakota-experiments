@@ -1,6 +1,6 @@
-# Delft3D PS 1
+# Delft3D Vector Parameter Study 1
 
-This is a parameter study experiment with Delft3D.
+This is a vector parameter study experiment with Delft3D.
 
 ## Files
 

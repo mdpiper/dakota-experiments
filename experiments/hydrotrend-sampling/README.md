@@ -1,7 +1,8 @@
-# HydroTrend UQ 1
+# HydroTrend Sampling Experiment
 
-This is an uncertainty quantification (UQ) experiment
-with HydroTrend.
+This is an uncertainty quantification (UQ) experiment with HydroTrend
+that uses the `sampling` technique
+with the `lhs` (Latin Hypercube Sampling) strategy.
 
 The input parameters `T` and `P`
 are again used.

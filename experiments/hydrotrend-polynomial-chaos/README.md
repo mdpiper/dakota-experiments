@@ -1,9 +1,9 @@
-# HydroTrend UQ 2
+# HydroTrend Polynomial Chaos Experiment
 
-This is an uncertainty quantification (UQ) experiment
-with HydroTrend.
+This is an uncertainty quantification (UQ) experiment with HydroTrend
+using the (awesomely named) `polynomial_chaos` method.
 
-Unlike **hydrotrend-uq-1**,
+Unlike **hydrotrend-sampling**,
 which uses sampling to propagate uncertainties through a model,
 this experiment uses 
 polynomial chaos expansions (PCE),
@@ -18,7 +18,7 @@ estimates are made for the amount of uncertainty
 in the response
 than can be attributed to the input variables.
 
-As in **hydrotrend-uq-1**,
+As in **hydrotrend-sampling**,
 the input parameters `T` and `P`
 are used,
 varying uniformly over an interval approximately
@@ -47,7 +47,7 @@ for the polynomial fit to the response function,
 giving a measure of the spread of `Qs`
 from the uncertainty in the input parameters.
 (Note that this experiment uses 
-a factor of four fewer HydroTrend runs than in **hydrotrend-uq-1**,
+a factor of four fewer HydroTrend runs than in **hydrotrend-sampling**,
 yet it achieves similar moments for `_Qs`.)
 Because the `variance_based_decomp` keyword was set,
 Dakota computes sensitivity indices,
