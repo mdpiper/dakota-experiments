@@ -1,4 +1,4 @@
-# Dakota: HydroTrend Experiment 1
+# Dakota: HydroTrend Centered Parameter Study Experiment
 
 In this computer experiment,
 a centered parameter study of HydroTrend
