@@ -1,11 +1,11 @@
-# Delft3D UQ 1
+# Delft3D Polynomial Chaos Experiment 1
 
 This is an uncertainty quantification (UQ) experiment
 with [Delft3D](http://oss.deltares.nl/web/delft3d).
 
 In this experiment,
 the polynomial chaos expansion (PCE) technique 
-(see also **hydrotrend-uq-2**)
+(see also **hydrotrend-polynomial-chaos**)
 is used
 to measure the effects of varying three parameters:
 

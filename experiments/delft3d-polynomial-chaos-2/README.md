@@ -1,11 +1,11 @@
-# Delft3D UQ 2
+# Delft3D Polynomial Chaos Experiment 2
 
 This is an uncertainty quantification (UQ) experiment
 with [Delft3D](http://oss.deltares.nl/web/delft3d).
 
 In this experiment,
 the polynomial chaos expansion (PCE) technique 
-(see also **delft3d-uq-1**)
+(see also **delft3d-polynomial-chaos-1**)
 is used
 to measure the effects of varying four parameters:
 
