@@ -1,4 +1,4 @@
-# HydroTrend Experiment 2
+# HydroTrend Multidim Parameter Study Experiment
 
 In this computer experiment,
 a two-dimensional parameter study of HydroTrend
