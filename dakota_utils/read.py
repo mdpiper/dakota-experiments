@@ -97,7 +97,10 @@ def get_data(dat_file):
     '''
     Reads the data from Dakota tabular graphics file. Returns a numpy array.
     '''
-    return np.loadtxt(dat_file, skiprows=1, unpack=True)
+    names = get_names(dat_file)
+    rnames = range(len(names))
+    rnames.pop(names.index('interface'))
+    return np.loadtxt(dat_file, skiprows=1, unpack=True, usecols=rnames)
 
 
 def read_tabular(dat_file):
