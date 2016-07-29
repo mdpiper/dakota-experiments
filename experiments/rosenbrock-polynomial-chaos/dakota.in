@@ -1,0 +1,29 @@
+# Dakota input file
+environment
+  tabular_data
+    tabular_data_file = 'dakota.dat'
+
+method
+  polynomial_chaos
+    quadrature_order = 4
+    non_nested
+    response_levels = 1 5 10 50 100 500 1000
+    sample_type = lhs
+    samples = 500
+
+variables
+  uniform_uncertain = 2
+    descriptors = 'x1' 'x2'
+    lower_bounds = -2.0 -2.0
+    upper_bounds = 2.0 2.0
+
+interface
+  id_interface = 'CSDMS'
+  direct
+  analysis_driver = 'rosenbrock'
+
+responses
+  response_functions = 1
+    response_descriptors = 'y1'
+  no_gradients
+  no_hessians
