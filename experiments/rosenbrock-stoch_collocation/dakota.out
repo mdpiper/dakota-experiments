@@ -1,0 +1,299 @@
+Writing new restart file dakota.rst
+
+>>>>> Executing environment.
+
+>>>>> Running stoch_collocation iterator.
+
+>>>>> Building global_nodal_interpolation_polynomial approximations.
+
+Number of Gauss points per variable: { 4 4 }
+Total number of integration points: 16
+
+------------------------------
+Begin    CSDMS Evaluation    1
+------------------------------
+Parameters for evaluation 1:
+                     -1.7222726232e+00 x1
+                     -1.7222726232e+00 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 1:
+Active set vector = { 1 }
+                      2.2056098784e+03 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation    2
+------------------------------
+Parameters for evaluation 2:
+                     -6.7996208717e-01 x1
+                     -1.7222726232e+00 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response datDAKOTA execution time in seconds:
+  Total CPU        =   0.031371 [parent =   0.031365, child =      6e-06]
+  Total wall clock =   0.053632
+MS Evaluation    3
+------------------------------
+Parameters for evaluation 3:
+                      6.7996208717e-01 x1
+                     -1.7222726232e+00 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 3:
+Active set vector = { 1 }
+                      4.7735934323e+02 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation    4
+------------------------------
+Parameters for evaluation 4:
+                      1.7222726232e+00 x1
+                     -1.7222726232e+00 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 4:
+Active set vector = { 1 }
+                      2.1987207879e+03 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation    5
+------------------------------
+Parameters for evaluation 5:
+                     -1.7222726232e+00 x1
+                     -6.7996208717e-01 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 5:
+Active set vector = { 1 }
+                      1.3368773289e+03 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation    6
+------------------------------
+Parameters for evaluation 6:
+                     -6.7996208717e-01 x1
+                     -6.7996208717e-01 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 6:
+Active set vector = { 1 }
+                      1.3330960666e+02 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation    7
+------------------------------
+Parameters for evaluation 7:
+                      6.7996208717e-01 x1
+                     -6.7996208717e-01 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 7:
+Active set vector = { 1 }
+                      1.3058975831e+02 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation    8
+------------------------------
+Parameters for evaluation 8:
+                      1.7222726232e+00 x1
+                     -6.7996208717e-01 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 8:
+Active set vector = { 1 }
+                      1.3299882384e+03 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation    9
+------------------------------
+Parameters for evaluation 9:
+                     -1.7222726232e+00 x1
+                      6.7996208717e-01 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 9:
+Active set vector = { 1 }
+                      5.3010965917e+02 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation   10
+------------------------------
+Parameters for evaluation 10:
+                     -6.7996208717e-01 x1
+                      6.7996208717e-01 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 10:
+Active set vector = { 1 }
+                      7.5578425583e+00 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation   11
+------------------------------
+Parameters for evaluation 11:
+                      6.7996208717e-01 x1
+                      6.7996208717e-01 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 11:
+Active set vector = { 1 }
+                      4.8379942096e+00 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation   12
+------------------------------
+Parameters for evaluation 12:
+                      1.7222726232e+00 x1
+                      6.7996208717e-01 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 12:
+Active set vector = { 1 }
+                      5.2322056868e+02 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation   13
+------------------------------
+Parameters for evaluation 13:
+                     -1.7222726232e+00 x1
+                      1.7222726232e+00 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 13:
+Active set vector = { 1 }
+                      1.6215201939e+02 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation   14
+------------------------------
+Parameters for evaluation 14:
+                     -6.7996208717e-01 x1
+                      1.7222726232e+00 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 14:
+Active set vector = { 1 }
+                      1.6156316736e+02 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation   15
+------------------------------
+Parameters for evaluation 15:
+                      6.7996208717e-01 x1
+                      1.7222726232e+00 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 15:
+Active set vector = { 1 }
+                      1.5884331901e+02 y1
+
+
+
+------------------------------
+Begin    CSDMS Evaluation   16
+------------------------------
+Parameters for evaluation 16:
+                      1.7222726232e+00 x1
+                      1.7222726232e+00 x2
+
+Direct interface: invoking rosenbrock 
+
+Active response data for CSDMS evaluation 16:
+Active set vector = { 1 }
+                      1.5526292890e+02 y1
+
+
+Constructing global approximations with no anchor, 16 DACE samples, and 0 reused points.
+
+<<<<< global_nodal_interpolation_polynomial approximation builds completed.
+
+NonD lhs Samples = 500 Seed (system-generated) = 243427
+Beginning Approximate Fn Evaluations...
+<<<<< Function evaluation summary (CSDMS): 16 total (16 new, 0 duplicate)
+-----------------------------------------------------------------------------
+Statistics derived analytically from polynomial expansion:
+
+Moment-based statistics for each response function:
+                            Mean           Std Dev          Skewness          Kurtosis
+y1
+  expansion:    4.5566666667e+02  5.9418394122e+02  1.7543795020e+00  2.1554619840e+00
+  integration:  4.5566666667e+02  5.9418394122e+02  1.7543795020e+00  2.1554619840e+00
+
+Covariance matrix for response functions:
+[[  3.5305455601e+05 ]] 
+
+Local sensitivities for each response function evaluated at uncertain variable means:
+y1:
+ [ -2.0000000000e+00  3.3410009453e-14 ] 
+
+Statistics based on 500 samples performed on polynomial expansion:
+
+Probability Density Function (PDF) histograms for each response function:
+PDF for y1:
+          Bin Lower          Bin Upper      Density Value
+          ---------          ---------      -------------
+  -1.3536055918e+02   1.0000000000e+00   1.0853578255e-03
+   1.0000000000e+00   5.0000000000e+00   1.5000000000e-03
+   5.0000000000e+00   1.0000000000e+01   1.6000000000e-03
+   1.0000000000e+01   5.0000000000e+01   1.2500000000e-03
+   5.0000000000e+01   1.0000000000e+02   1.4800000000e-03
+   1.0000000000e+02   5.0000000000e+02   1.0150000000e-03
+   5.0000000000e+02   1.0000000000e+03   3.1200000000e-04
+   1.0000000000e+03   2.8630021193e+03   8.1588742400e-05
+
+Level mappings for each response function:
+Cumulative Distribution Function (CDF) for y1:
+     Response Level  Probability Level  Reliability Index  General Rel Index
+     --------------  -----------------  -----------------  -----------------
+   1.0000000000e+00   1.4800000000e-01
+   5.0000000000e+00   1.5400000000e-01
+   1.0000000000e+01   1.6200000000e-01
+   5.0000000000e+01   2.1200000000e-01
+   1.0000000000e+02   2.8600000000e-01
+   5.0000000000e+02   6.9200000000e-01
+   1.0000000000e+03   8.4800000000e-01
+-----------------------------------------------------------------------------
+
+<<<<< Iterator stoch_collocation completed.
+<<<<< Environment execution completed.
